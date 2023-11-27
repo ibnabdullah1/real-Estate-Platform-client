@@ -1,5 +1,4 @@
 import axiosPublic from "./axiosPublic";
-import useAxiosSecure from "./useAxiosSecure";
 // save user data in database
 export const saveUser = async (user) => {
   const currentUser = {
@@ -7,10 +6,7 @@ export const saveUser = async (user) => {
     email: user.email,
     role: "user",
   };
-  const { data } = await useAxiosSecure.put(
-    `/users/${user?.email}`,
-    currentUser
-  );
+  const { data } = await axiosPublic.put(`/users/${user?.email}`, currentUser);
   return data;
 };
 

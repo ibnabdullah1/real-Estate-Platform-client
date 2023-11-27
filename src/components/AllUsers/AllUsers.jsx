@@ -1,10 +1,15 @@
 import { FaUsers } from "react-icons/fa6";
 import { FaTrashAlt } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 import useAxiosSecure from "../../Api/useAxiosSecure";
+import { useState } from "react";
+import { userRoleUpdate } from "../../Api/properties";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState();
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -13,11 +18,53 @@ const AllUsers = () => {
     },
   });
 
-  const handleMakeAdmin = (user) => {
-    console.log(user);
+  const handleRoleAdmin = async (id) => {
+    setLoading(true);
+
+    try {
+      const updateRole = await userRoleUpdate(id, "admin");
+      if (updateRole.modifiedCount > 0) {
+        refetch();
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleRoleAgent = async (id) => {
+    setLoading(true);
+
+    try {
+      const updateRole = await userRoleUpdate(id, "agent");
+      if (updateRole.modifiedCount > 0) {
+        refetch();
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleDelete = (user) => {};
+  const handleDelete = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          }
+        });
+      }
+    });
+  };
 
   return (
     <div className="overflow-x-auto max-w-6xl mx-auto">
@@ -69,6 +116,7 @@ const AllUsers = () => {
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
                 <button
+                  onClick={() => handleRoleAdmin(user._id)}
                   disabled={user.role == "admin"}
                   className={
                     user.role == "admin"
@@ -81,6 +129,7 @@ const AllUsers = () => {
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
                 <button
+                  onClick={() => handleRoleAgent(user._id)}
                   disabled={user.role == "agent"}
                   className={
                     user.role == "agent"
@@ -92,7 +141,10 @@ const AllUsers = () => {
                 </button>
               </td>
               <td className="px-6 py-3 text-center text-xs font-medium   tracking-wider">
-                <button className=" text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white ">
+                <button
+                  onClick={() => handleDelete(user)}
+                  className=" text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white "
+                >
                   Delete
                 </button>
                 {user.role === "agent" && (

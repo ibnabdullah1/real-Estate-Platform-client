@@ -5,15 +5,17 @@ import { imageUpload } from "../../Api/utilis";
 import { saveUser } from "../../Api/auth";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { useState } from "react";
 const SignUp = () => {
-  const { createUser, updateUserProfile, loading, signInWithGoogle } =
-    useAuth();
+  const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
   const from = location?.state?.from?.pathname || "/";
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -24,7 +26,10 @@ const SignUp = () => {
       // Upload the image
       const imageData = await imageUpload(image);
       const result = await createUser(email, password);
-
+      console.log(result);
+      if (result?.user?.email) {
+        setLoading(false);
+      }
       await updateUserProfile(name, imageData?.data?.display_url);
       const dbResponse = await saveUser(result?.user);
       console.log(dbResponse);

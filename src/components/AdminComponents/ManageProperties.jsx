@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getAllRequestedProperties, getReqProperty } from "../../Api/auth";
-import { reqPropertyUpdate } from "../../Api/properties";
+import { agentRequestUpdate } from "../../Api/properties";
 import { useQuery } from "@tanstack/react-query";
 
 const ManageProperties = () => {
@@ -14,7 +14,7 @@ const ManageProperties = () => {
     setIsLoading(true);
 
     try {
-      const updateProperty = await reqPropertyUpdate(id, "verified");
+      const updateProperty = await agentRequestUpdate(id, "verified");
       if (updateProperty.modifiedCount > 0) {
         refetch();
         await getReqProperty(id);
@@ -28,7 +28,8 @@ const ManageProperties = () => {
     setIsLoading(true);
     try {
       await getReqProperty(id);
-      const updateProperty = await reqPropertyUpdate(id, "rejected");
+      const updateProperty = await agentRequestUpdate(id, "rejected");
+      console.log(updateProperty);
       if (updateProperty.modifiedCount > 0) {
         refetch();
       }
@@ -89,14 +90,18 @@ const ManageProperties = () => {
               <td>
                 <div className="flex gap-3 pr-3">
                   {item.status === "verified" ? (
-                    <button className=" text-xs px-2 py-1 font-medium  rounded bg-[#24d53b] text-white ">
+                    <button className=" text-xs px-2 py-1 font-medium  rounded bg-[#24d53b] text-white">
                       verified
                     </button>
                   ) : (
                     <button
                       disabled={item.status === "rejected"}
                       onClick={() => handleAddProperty(item?._id)}
-                      className=" transform duration-500  text-xs px-2 py-1 font-medium text-[#24d53b] border border-[#24d53b] rounded hover:bg-[#24d53b] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none "
+                      className={
+                        item.status === "rejected"
+                          ? "bg-gray-300 text-gray-400 text-xs px-2 py-1  rounded  font-medium "
+                          : " transform duration-500  text-xs px-2 py-1 font-medium text-[#24d53b] border border-[#24d53b] rounded hover:bg-[#24d53b] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none "
+                      }
                     >
                       verify
                     </button>

@@ -1,5 +1,16 @@
 import axiosPublic from "./axiosPublic";
 
+// role status  update
+export const userRoleUpdate = async (id, message) => {
+  const roleUpdate = {
+    role: message,
+  };
+  console.log(roleUpdate);
+  const { data } = await axiosPublic.put(`/user/${id}`, roleUpdate);
+  console.log(data);
+  return data;
+};
+
 export const addRequestProperty = async (RequestedPropertyData) => {
   const { data } = await axiosPublic.post(
     `/requestedProperties`,
@@ -7,26 +18,13 @@ export const addRequestProperty = async (RequestedPropertyData) => {
   );
   return data;
 };
-// Admin status update
-export const reqPropertyUpdate = async (id, message) => {
-  const statusUpdate = {
-    status: message,
-  };
-  const { data } = await axiosPublic.put(
-    `/requestedProperty/${id}`,
-    statusUpdate
-  );
-  return data;
-};
+
 // Agent property update
-export const agentPropertyUpdate = async (id, message) => {
+export const agentRequestUpdate = async (id, message) => {
   const statusUpdate = {
     status: message,
   };
-  const { data } = await axiosPublic.put(
-    `/requestedProperty/${id}`,
-    statusUpdate
-  );
+  const { data } = await axiosPublic.put(`/updateStatus/${id}`, statusUpdate);
   return data;
 };
 

@@ -4,21 +4,24 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { saveUser } from "../../Api/auth";
+import { useState } from "react";
 
 const Login = () => {
-  const { signIn, loading, signInWithGoogle } = useAuth();
+  const { signIn, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [loading, setLoading] = useState(false);
   const from = location?.state?.from?.pathname || "/";
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     try {
       await signIn(email, password);
+      setLoading(false);
       navigate(from, { replace: true });
       toast.success("Login successfully");
     } catch (e) {
