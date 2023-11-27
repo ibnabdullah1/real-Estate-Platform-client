@@ -66,6 +66,19 @@ const router = createBrowserRouter([
         path: "user-reviews",
         element: <UserReview />,
       },
+      // Agent Dashboards
+      {
+        path: "agent-profile",
+        element: <AgentProfile />,
+      },
+      {
+        path: "addProperties",
+        element: <AddProperties />,
+      },
+      {
+        path: "added-properties",
+        element: <AgentAddedProperties />,
+      },
     ],
   },
 ]);
