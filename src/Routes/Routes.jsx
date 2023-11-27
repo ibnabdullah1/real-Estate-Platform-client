@@ -7,6 +7,7 @@ import Home from "../Pages/Home/Home/Home";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AddProperties from "../Pages/AddProperties/AddProperties";
 import AllProperties from "../components/AllProperties/AllProperties";
+import UserProfile from "../components/UserComponents/UserProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +42,31 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <DashboardLayout />,
+    children: [
+      // user Dashboards
+      {
+        path: "user-profile",
+        element: <UserProfile />,
+      },
+      {
+        path: "wishlist",
+        element: <UserWishlist />,
+      },
+      {
+        path: "wishlist/offer/:id",
+        element: <OfferForm />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/wishlist/${params.id}`),
+      },
+      {
+        path: "property-bought",
+        element: <UserPropertyBought />,
+      },
+      {
+        path: "user-reviews",
+        element: <UserReview />,
+      },
+    ],
   },
 ]);
 export default router;
