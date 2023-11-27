@@ -4,7 +4,9 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Home from "../Pages/Home/Home/Home";
-
+import DashboardLayout from "../Layout/DashboardLayout";
+import AddProperties from "../Pages/AddProperties/AddProperties";
+import AllProperties from "../components/AllProperties/AllProperties";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +17,17 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+
+      {
+        path: "/all-properties",
+        element: <AllProperties />,
+      },
+      {
+        path: "/properties/:id",
+        element: <PropertiesDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/properties/${params.id}`),
+      },
     ],
   },
   {
@@ -24,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/signUp",
     element: <SignUp />,
+  },
+  {
+    path: "dashboard",
+    element: <DashboardLayout />,
   },
 ]);
 export default router;
