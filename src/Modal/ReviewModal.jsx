@@ -1,8 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { addReview } from "../../Api/properties";
 import toast from "react-hot-toast";
-import useAuth from "../../Hooks/useAuth";
+import { addReview } from "../Api/properties";
+import useAuth from "../Hooks/useAuth";
 const ReviewModal = ({ agent, title, closeModal, isOpen }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
@@ -29,8 +29,8 @@ const ReviewModal = ({ agent, title, closeModal, isOpen }) => {
     setLoading(true);
     e.preventDefault();
     try {
-      //   const data = await addReview(reviewData);
-      //   console.log(data);
+      const data = await addReview(reviewData);
+      console.log(data);
     } catch (err) {
       toast.error(err.message);
     } finally {
