@@ -4,10 +4,21 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Home from "../Pages/Home/Home/Home";
-import DashboardLayout from "../Layout/DashboardLayout";
 import AddProperties from "../Pages/AddProperties/AddProperties";
 import AllProperties from "../components/AllProperties/AllProperties";
+import PropertiesDetails from "../components/AllProperties/PropertiesDetails";
+import DashboardLayout from "../Layout/DashboardLayout";
 import UserProfile from "../components/UserComponents/UserProfile";
+import UserWishlist from "../components/UserComponents/UserWishlist";
+import UserPropertyBought from "../components/UserComponents/UserPropertyBought";
+import UserReview from "../components/UserComponents/UserReview";
+import AgentProfile from "../components/AgentComponents/AgentProfile";
+import AdminProfile from "../components/AdminComponents/AdminProfile";
+import OfferForm from "../components/Form/OfferForm";
+import ManageProperties from "../components/AdminComponents/ManageProperties";
+import AgentAddedProperties from "../components/AgentComponents/AgentAddedproperties";
+import AllUsers from "../components/AllUsers/AllUsers";
+import UpdateForm from "../components/Form/UpdateForm";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -78,6 +89,26 @@ const router = createBrowserRouter([
       {
         path: "added-properties",
         element: <AgentAddedProperties />,
+      },
+      {
+        path: "added-properties/update/:id",
+        element: <UpdateForm />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/addedProperty/${params.id}`),
+      },
+
+      // Admin Dashboards
+      {
+        path: "adminProfile",
+        element: <AdminProfile />,
+      },
+      {
+        path: "manage-users",
+        element: <AllUsers />,
+      },
+      {
+        path: "manage-properties",
+        element: <ManageProperties />,
       },
     ],
   },
