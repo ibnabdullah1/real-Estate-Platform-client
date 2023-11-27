@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { addWishlist } from "../../Api/properties";
 import toast from "react-hot-toast";
-import ReviewModal from "../Modal/ReviewModal";
 import useAuth from "../../Hooks/useAuth";
+import ReviewModal from "../../Modal/ReviewModal";
 
 const PropertiesDetails = () => {
   const { user } = useAuth();

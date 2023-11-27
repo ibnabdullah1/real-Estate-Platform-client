@@ -19,6 +19,7 @@ import ManageProperties from "../components/AdminComponents/ManageProperties";
 import AgentAddedProperties from "../components/AgentComponents/AgentAddedproperties";
 import AllUsers from "../components/AllUsers/AllUsers";
 import UpdateForm from "../components/Form/UpdateForm";
+
 const router = createBrowserRouter([
   {
     path: "/",
