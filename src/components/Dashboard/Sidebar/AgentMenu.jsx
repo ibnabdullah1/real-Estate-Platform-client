@@ -27,7 +27,7 @@ const AgentMenu = () => {
       <MenuItem
         icon={VscGitPullRequestGoToChanges}
         label="Requested Properties"
-        address="requested-properties"
+        address="request-offers"
       />
     </>
   );

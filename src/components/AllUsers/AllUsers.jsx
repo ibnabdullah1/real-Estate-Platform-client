@@ -1,22 +1,27 @@
-import { FaUsers } from "react-icons/fa6";
-import { FaTrashAlt } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import toast from "react-hot-toast";
 import useAxiosSecure from "../../Api/useAxiosSecure";
 import { useState } from "react";
-import { userRoleUpdate } from "../../Api/properties";
-
+import { FindUserData, userRoleUpdate } from "../../Api/properties";
+import { getFraudAgentProperties } from "../../Api/auth";
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState();
-  const { refetch, data: users = [] } = useQuery({
+  const {
+    refetch,
+    data: users = [],
+    isLoading: isUserLoading,
+  } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
+
+  if (isUserLoading) {
+    return "loading....";
+  }
 
   const handleRoleAdmin = async (id) => {
     setLoading(true);
@@ -64,6 +69,22 @@ const AllUsers = () => {
         });
       }
     });
+  };
+  const handleFraudUser = async (user, id) => {
+    console.log(user.email);
+    try {
+      const updateRole = await userRoleUpdate(id, "fraud");
+      if (updateRole.modifiedCount > 0) {
+        const fraudUserData = await getFraudAgentProperties(user.email);
+        const arrayOfIds = fraudUserData.map((item) => item._id);
+        console.log(arrayOfIds);
+        await FindUserData(arrayOfIds);
+        refetch();
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -143,12 +164,15 @@ const AllUsers = () => {
               <td className="px-6 py-3 text-center text-xs font-medium   tracking-wider">
                 <button
                   onClick={() => handleDelete(user)}
-                  className=" text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white "
+                  className=" text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white"
                 >
                   Delete
                 </button>
                 {user.role === "agent" && (
-                  <button className=" ml-3 text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white ">
+                  <button
+                    onClick={() => handleFraudUser(user, user._id)}
+                    className=" ml-3 text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white "
+                  >
                     Fraud
                   </button>
                 )}

@@ -86,7 +86,14 @@ const AgentAddedPropertiesCard = ({ property, refetch }) => {
         </p>
         <div className="flex gap-3">
           <Link to={`update/${_id}`}>
-            <button className="flex gap-[4px] justify-center items-center transform duration-500 px-6 py-2 text-sm font-medium text-[#24d53b] border border-[#24d53b] rounded hover:bg-[#24d53b] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none uppercase">
+            <button
+              disabled={status === "rejected"}
+              className={
+                status === "rejected"
+                  ? "flex gap-[4px] justify-center items-center bg-gray-300 text-gray-400 text-sm px-6 py-2  rounded  font-medium "
+                  : "flex gap-[4px] justify-center items-center transform duration-500 px-6 py-2 text-sm font-medium text-[#24d53b] border border-[#24d53b] rounded hover:bg-[#24d53b] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none uppercase"
+              }
+            >
               <GrUpdate className="text-lg" />
               Update
             </button>

@@ -4,7 +4,7 @@ import { MdOutlineManageAccounts } from "react-icons/md";
 import { LuTableProperties } from "react-icons/lu";
 import { MdRateReview } from "react-icons/md";
 import { BsGraphUp } from "react-icons/bs";
-
+import { RiAdvertisementFill } from "react-icons/ri";
 const AdminMenu = () => {
   return (
     <>
@@ -24,6 +24,12 @@ const AdminMenu = () => {
         icon={MdRateReview}
         label="Manage Reviews"
         address="manage-reviews"
+      />
+
+      <MenuItem
+        icon={RiAdvertisementFill}
+        label="Advertise property"
+        address="advertisements"
       />
     </>
   );

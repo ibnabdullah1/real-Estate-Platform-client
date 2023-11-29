@@ -20,10 +20,12 @@ const AddProperties = () => {
     const image = form.image.files[0];
     const year_built = parseInt(form.year_built.value);
     const square_footage = parseInt(form.square_footage.value);
-    const price = parseInt(form.price.value);
+
     const rooms = parseInt(form.room.value);
     const bedrooms = parseInt(form.bedrooms.value);
     const bathrooms = parseInt(form.bathrooms.value);
+    const price1 = form.price1.value;
+    const price2 = form.price2.value;
     const description = form.description.value;
     const agent = {
       name: user?.displayName,
@@ -31,7 +33,7 @@ const AddProperties = () => {
       email: user?.email,
     };
     const image_url = await imageUpload(image);
-
+    const price = `${price1}-${price2}`;
     const RequestedPropertyData = {
       location,
       title,
@@ -46,7 +48,7 @@ const AddProperties = () => {
       image: image_url?.data?.display_url,
       status: "verify",
     };
-
+    console.log(RequestedPropertyData);
     try {
       const data = await addRequestProperty(RequestedPropertyData);
       console.log(data);
@@ -54,7 +56,7 @@ const AddProperties = () => {
         toast.success("Property Requested successfully!");
         setUploadButtonText("Uploaded!");
       }
-      //   navigate("/dashboard/my-listings");
+      // navigate("/dashboard/my-listings");
     } catch (err) {
       console.log(err);
       toast.error(err.message);

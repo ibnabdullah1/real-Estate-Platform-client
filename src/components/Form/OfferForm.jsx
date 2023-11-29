@@ -2,13 +2,17 @@ import { useLoaderData } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { addOfferRequest } from "../../Api/properties";
+import { split } from "postcss/lib/list";
 
 const OfferForm = () => {
   const { title, location, agent, price, image, _id } = useLoaderData();
   const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [prices, setPrices] = useState("");
   const [minDate, setMinDate] = useState(getCurrentDate());
-
+  const minPrice = parseFloat(price.split("-")[0]);
+  console.log(minPrice);
   // date format functions
   function getCurrentDate() {
     const currentDate = new Date();
@@ -20,24 +24,37 @@ const OfferForm = () => {
   const handleFocus = () => {
     setMinDate(getCurrentDate());
   };
-  // Price related functions
+  // // Price related functions
+  // const handlePriceChange = (e) => {
+  //   const inputValue = parseFloat(e.target.value);
+  //   // example price = "3000000 - 5500000"
+  //   if (isNaN(inputValue) || inputValue > price) {
+  //     toast.error("Price exceeds the allowed range");
+  //     setPrices("");
+  //   } else {
+  //     setPrices(e.target.value);
+  //   }
+  // };
+
   const handlePriceChange = (e) => {
     const inputValue = parseFloat(e.target.value);
+    const [, maxPrice] = price.split("-").map(parseFloat);
 
-    if (isNaN(inputValue) || inputValue > price) {
-      toast.error("Price exceeds the allowed range");
+    if (isNaN(inputValue) || inputValue > maxPrice) {
+      toast.error("Price must be within the allowed range");
       setPrices("");
     } else {
       setPrices(e.target.value);
     }
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const buyerDate = e.target.date.value;
-    const offerPrice = e.target.offerPrice.value;
+    const offerPrice = parseInt(e.target.offerPrice.value);
     const offerData = {
       _id,
+      buyerEmail: user?.email,
+      buyerName: user?.displayName,
       buyerDate,
       offerPrice,
       title,
@@ -48,6 +65,19 @@ const OfferForm = () => {
       status: "pending",
     };
     console.log(offerData);
+
+    try {
+      const data = await addOfferRequest(offerData);
+      console.log(data);
+      if (data.insertedId) {
+        toast.success("Offer Requested successfully!");
+      }
+      //   navigate("/dashboard/my-listings");
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -93,7 +123,7 @@ const OfferForm = () => {
 
             <div className="space-y-1 text-sm">
               <label htmlFor="price" className="block text-gray-400">
-                Price
+                Price Range
               </label>
               <input
                 className="w-full px-4 py-3 text-gray-400 bg-gray-100  rounded-md "

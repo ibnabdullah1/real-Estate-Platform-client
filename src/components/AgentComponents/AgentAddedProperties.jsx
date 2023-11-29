@@ -7,8 +7,6 @@ import AgentAddedPropertiesCard from "./AgentAddedPropertiesCard";
 
 const AgentAddedProperties = () => {
   const { user } = useAuth();
-  const [addedProperties, setAddedProperties] = useState([]);
-
   const axiosSecure = useAxiosSecure();
   const { refetch, data: properties = [] } = useQuery({
     queryKey: ["properties"],

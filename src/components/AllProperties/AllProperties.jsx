@@ -44,12 +44,21 @@ const AllProperties = () => {
 
     const sortedData = [...properties];
     if (selectedSortOrder === "-1") {
-      sortedData.sort((a, b) => b.price - a.price);
+      sortedData.sort(
+        (a, b) => getPriceRange(b.price) - getPriceRange(a.price)
+      );
     } else if (selectedSortOrder === "1") {
-      sortedData.sort((a, b) => a.price - b.price);
+      sortedData.sort(
+        (a, b) => getPriceRange(a.price) - getPriceRange(b.price)
+      );
     }
 
     setProperties(sortedData);
+  };
+
+  const getPriceRange = (priceString) => {
+    const [lowerBound] = priceString.split("-");
+    return parseInt(lowerBound, 10);
   };
 
   return (
@@ -57,6 +66,7 @@ const AllProperties = () => {
       <h2 className="text-3xl text-center mt-10  text-[#1c4456] mb-5 font-bold uppercase">
         All Properties
       </h2>
+
       <div className="search lg:my-10 md:flex px-4 md:px-0 justify-center my-5 mx-auto w-[100%] lg:w-[80%] md:w-[100%] ">
         <form className="lg:w-[70%] md:w-[68%] w-[80%]" onSubmit={handleSearch}>
           <label

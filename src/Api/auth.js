@@ -18,7 +18,7 @@ export const getAllProperties = async () => {
 
 // Specific agent added properties
 
-// get all bookings for a agent by email
+// get all properties for a agent by email
 export const getAgentProperties = async (email) => {
   const { data } = await axiosPublic(`/addedProperty/agent/${email}`);
   return data;
@@ -44,5 +44,18 @@ export const getRole = async (email) => {
 export const getUser = async (email) => {
   const { data } = await axiosPublic(`/user/${email}`);
   console.log(data);
+  return data;
+};
+
+// get all reviews
+// get all Properties
+export const getAllReviews = async () => {
+  const { data } = await axiosPublic("/reviews");
+  return data;
+};
+
+// fraud agent get all
+export const getFraudAgentProperties = async (email) => {
+  const { data } = await axiosPublic(`/fraudAgent/${email}`);
   return data;
 };

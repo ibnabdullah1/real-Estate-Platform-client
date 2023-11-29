@@ -47,15 +47,18 @@ const Navbar = () => {
             <h2 className="font-bold text-2xl ">Real Estate</h2>
           </div>
 
-          <div
-            onClick={() => setOpen(!open)}
-            className=" cursor-pointer lg:hidden"
-          >
-            {open ? (
-              <AiOutlineClose className="text-2xl" />
-            ) : (
-              <FaBars className="text-2xl" />
-            )}
+          <div className="flex cursor-pointer gap-3 lg:hidden justify-center items-center">
+            <MenuDropdown />
+            <div
+              onClick={() => setOpen(!open)}
+              className=" cursor-pointer lg:hidden"
+            >
+              {open ? (
+                <AiOutlineClose className="text-2xl" />
+              ) : (
+                <FaBars className="text-2xl" />
+              )}
+            </div>
           </div>
         </div>
 
@@ -68,6 +71,7 @@ const Navbar = () => {
             <li key={i} className="md:ml-8 lg:my-0 my-7 font-semibold">
               <NavLink
                 to={link.link}
+                onClick={() => setOpen(false)}
                 className={({ isActive, isPending }) =>
                   isPending
                     ? "pending"
@@ -81,8 +85,10 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        {/* button */}
-        <MenuDropdown />
+
+        <div className="cursor-pointer hidden lg:flex">
+          <MenuDropdown />
+        </div>
       </div>
     </div>
   );

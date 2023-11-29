@@ -52,6 +52,10 @@ const PropertiesDetails = () => {
     e.preventDefault();
     try {
       const data = await addWishlist(wishlistData);
+      console.log(data);
+      if (data.insertedId) {
+        toast.success("Your Property added in wishlist");
+      }
       const isExist = data?.message?.trim() === "Is already added in wishlist";
       if (isExist) {
         toast.error("Is already added in wishlist");

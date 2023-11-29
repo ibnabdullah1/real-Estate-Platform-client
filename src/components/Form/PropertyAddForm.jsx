@@ -87,34 +87,44 @@ const PropertyAddForm = ({
               />
             </div>
           </div>
-          <div className="flex justify-between gap-2">
-            <div className="space-y-1 text-sm">
-              <label htmlFor="price" className="block text-gray-600">
-                Price
-              </label>
+
+          <div className="space-y-1 text-sm">
+            <label htmlFor="price" className="block text-gray-600">
+              Price Range
+            </label>
+            <div className="flex justify-between items-center gap-2">
               <input
                 className="w-full px-4 py-3 text-gray-800 border border-[#1c4456] focus:outline-[#1c4456] rounded-md "
-                name="price"
-                id="price"
+                name="price1"
+                id="price1"
+                type="number"
+                placeholder="Price"
+                required
+              />{" "}
+              to
+              <input
+                className="w-full px-4 py-3 text-gray-800 border border-[#1c4456] focus:outline-[#1c4456] rounded-md "
+                name="price2"
+                id="price2"
                 type="number"
                 placeholder="Price"
                 required
               />
             </div>
+          </div>
 
-            <div className="space-y-1 text-sm">
-              <label htmlFor="guest" className="block text-gray-600">
-                Total room
-              </label>
-              <input
-                className="w-full px-4 py-3 text-gray-800 border border-[#1c4456] focus:outline-[#1c4456] rounded-md "
-                name="room"
-                id="room"
-                type="number"
-                placeholder="Total Room"
-                required
-              />
-            </div>
+          <div className="space-y-1 text-sm">
+            <label htmlFor="guest" className="block text-gray-600">
+              Total room
+            </label>
+            <input
+              className="w-full px-4 py-3 text-gray-800 border border-[#1c4456] focus:outline-[#1c4456] rounded-md "
+              name="room"
+              id="room"
+              type="number"
+              placeholder="Total Room"
+              required
+            />
           </div>
 
           <div className="flex justify-between gap-2">

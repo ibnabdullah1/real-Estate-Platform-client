@@ -10,6 +10,7 @@ const ManageProperties = () => {
     queryKey: ["data"],
     queryFn: async () => await getAllRequestedProperties(),
   });
+
   const handleAddProperty = async (id) => {
     setIsLoading(true);
 
@@ -99,7 +100,7 @@ const ManageProperties = () => {
                       onClick={() => handleAddProperty(item?._id)}
                       className={
                         item.status === "rejected"
-                          ? "bg-gray-300 text-gray-400 text-xs px-2 py-1  rounded  font-medium "
+                          ? "bg-gray-300 text-gray-400 text-xs px-2 py-1  rounded  font-medium"
                           : " transform duration-500  text-xs px-2 py-1 font-medium text-[#24d53b] border border-[#24d53b] rounded hover:bg-[#24d53b] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none "
                       }
                     >

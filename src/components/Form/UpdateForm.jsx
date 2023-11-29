@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import { imageUpload } from "../../Api/utilis";
@@ -6,9 +6,10 @@ import toast from "react-hot-toast";
 import { AgentPropertyUpdate } from "../../Api/properties";
 
 const UpdateForm = () => {
-  const { title, location, agent, price, _id } = useLoaderData();
+  const { title, location, agent, _id } = useLoaderData();
   const [loading, setLoading] = useState(false);
   const [uploadButtonText, setUploadButtonText] = useState("Upload Image");
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -16,9 +17,10 @@ const UpdateForm = () => {
     const title = form.title.value;
     const location = form.location.value;
     const image = form.image.files[0];
-    const price = parseInt(form.price.value);
+    const price1 = form.price1.value;
+    const price2 = form.price2.value;
     const image_url = await imageUpload(image);
-
+    const price = `${price1}-${price2}`;
     const updateData = {
       location,
       title,
@@ -31,6 +33,7 @@ const UpdateForm = () => {
       const updateProperty = await AgentPropertyUpdate(_id, updateData);
       if (updateProperty.modifiedCount > 0) {
         toast.success("Property updated successfully");
+        navigate("/dashboard/added-properties");
       }
       setLoading(false);
     } catch (error) {
@@ -121,18 +124,26 @@ const UpdateForm = () => {
               />
             </div>
           </div>
-          <div className="flex justify-between gap-2">
-            <div className="space-y-1 text-sm">
-              <label htmlFor="guest" className="block text-gray-400">
-                Price
-              </label>
+          <div className="space-y-1 text-sm">
+            <label htmlFor="price" className="block text-gray-600">
+              Price Range
+            </label>
+            <div className="flex justify-between items-center gap-2">
               <input
                 className="w-full px-4 py-3 text-gray-800 border border-[#1c4456] focus:outline-[#1c4456] rounded-md "
-                name="price"
-                id="price"
+                name="price1"
+                id="price1"
                 type="number"
                 placeholder="Price"
-                defaultValue={price}
+                required
+              />{" "}
+              to
+              <input
+                className="w-full px-4 py-3 text-gray-800 border border-[#1c4456] focus:outline-[#1c4456] rounded-md "
+                name="price2"
+                id="price2"
+                type="number"
+                placeholder="Price"
                 required
               />
             </div>

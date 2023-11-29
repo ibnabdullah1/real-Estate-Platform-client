@@ -5,7 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { HiOutlineHomeModern } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 
-const PropertiesCard = ({ property }) => {
+const AllAdvisementPropertiesCard = ({ advertisement }) => {
   const {
     _id,
     location,
@@ -19,7 +19,7 @@ const PropertiesCard = ({ property }) => {
     status,
     title,
     agent,
-  } = property;
+  } = advertisement;
   return (
     <div className=" rounded-md bg-[#F9FDFF]">
       <div className="">
@@ -34,15 +34,15 @@ const PropertiesCard = ({ property }) => {
           <div className="flex gap-2 mb-3">
             <img
               className="w-[40px] border-2 border-[#2b4d5e] h-[40px] rounded-[50%]"
-              src={agent.agentImage}
-              alt={agent.name}
+              src={agent?.agentImage}
+              alt={agent?.name}
             />
             <div>
               <h2 className="text-base text-[#2b4d5e] font-semibold">
-                {agent.name}
+                {agent?.name}
               </h2>
               <h2 className="text-base text-[#2b4d5e] -mt-1 font-semibold">
-                {agent.email}
+                {agent?.email}
               </h2>
             </div>
           </div>
@@ -90,4 +90,4 @@ const PropertiesCard = ({ property }) => {
   );
 };
 
-export default PropertiesCard;
+export default AllAdvisementPropertiesCard;
