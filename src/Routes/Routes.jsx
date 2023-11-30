@@ -53,7 +53,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/properties/${params.id}`),
+          fetch(
+            `https://real-estate-platform-server-eight.vercel.app/properties/${params.id}`
+          ),
       },
     ],
   },
@@ -86,7 +88,9 @@ const router = createBrowserRouter([
         path: "wishlist/offer/:id",
         element: <OfferForm />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/wishlist/${params.id}`),
+          fetch(
+            `https://real-estate-platform-server-eight.vercel.app/wishlist/${params.id}`
+          ),
       },
       {
         path: "property-bought",
@@ -100,7 +104,9 @@ const router = createBrowserRouter([
         path: "property-bought/payment/:id",
         element: <PaymentPage />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/addedOfferPayment/${params.id}`),
+          fetch(
+            `https://real-estate-platform-server-eight.vercel.app/addedOfferPayment/${params.id}`
+          ),
       },
       // Agent Dashboards
       {
@@ -159,7 +165,9 @@ const router = createBrowserRouter([
           </AgentRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/addedProperty/${params.id}`),
+          fetch(
+            `https://real-estate-platform-server-eight.vercel.app/addedProperty/${params.id}`
+          ),
       },
 
       // Admin Dashboards

@@ -36,6 +36,7 @@ const SignUp = () => {
       navigate("/");
       toast.success("Create user successfully");
     } catch (e) {
+      setLoading(false);
       toast.error(e?.message);
     }
   };
