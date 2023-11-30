@@ -3,6 +3,7 @@ import { useState } from "react";
 import useAxiosSecure from "../../Api/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import OfferItemCard from "./OfferItemCard";
+import { Helmet } from "react-helmet-async";
 
 const UserPropertyBought = () => {
   const { user } = useAuth();
@@ -18,12 +19,15 @@ const UserPropertyBought = () => {
   console.log(offerItems);
 
   return (
-    <>
+    <div>
+      <Helmet>
+        <title>Real Estate/user/dashboard/property bought</title>
+      </Helmet>
       {offerItems.length > 0 &&
         offerItems.map((offerItem, i) => (
           <OfferItemCard key={i} offerItem={offerItem} />
         ))}
-    </>
+    </div>
   );
 };
 

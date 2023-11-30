@@ -1,37 +1,38 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import toast from "react-hot-toast";
-import { addReview } from "../Api/properties";
 import useAuth from "../Hooks/useAuth";
-const ReviewModal = ({ agent, title, closeModal, reviewModalIsOpen }) => {
+import { addReport } from "../Api/properties";
+const ReportModal = ({ agent, _id, title, closeModal, reportModalIsOpen }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
-  const reviewerName = user?.displayName;
-  const reviewerImage = user?.photoURL;
-  const reviewerEmail = user?.email;
+  const reporterName = user?.displayName;
+  const reporterImage = user?.photoURL;
+  const reporterEmail = user?.email;
   const agentName = agent?.name;
-  const reviewDate = new Date();
+  const reportDate = new Date();
   const handleSubmit = async (e) => {
-    const reviewDescription = e.target.description.value;
-    if (reviewDescription.length < 10) {
+    const reportDescription = e.target.description.value;
+    if (reportDescription.length < 10) {
       toast.error("Please fill out minimum 10 characters ");
     }
-    if (reviewDescription.length >= 10) {
+    if (reportDescription.length >= 10) {
       closeModal();
     }
-    const reviewData = {
+    const reportData = {
       propertyTitle: title,
-      reviewDescription,
-      reviewerName,
-      reviewerImage,
-      reviewerEmail,
+      propertyId: _id,
+      reviewDescription: reportDescription,
+      reporterName: reporterName,
+      reporterImage: reporterImage,
+      reporterEmail: reporterEmail,
       agentName,
-      reviewDate,
+      reportDate,
     };
     setLoading(true);
     e.preventDefault();
     try {
-      const data = await addReview(reviewData);
+      const data = await addReport(reportData);
       console.log(data);
       if (data.insertedId) {
         toast.success("Your review sent successfully");
@@ -41,11 +42,11 @@ const ReviewModal = ({ agent, title, closeModal, reviewModalIsOpen }) => {
     } finally {
       setLoading(false);
     }
-    console.log(reviewData);
+    console.log(reportData);
   };
 
   return (
-    <Transition appear show={reviewModalIsOpen} as={Fragment}>
+    <Transition appear show={reportModalIsOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
@@ -75,7 +76,7 @@ const ReviewModal = ({ agent, title, closeModal, reviewModalIsOpen }) => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Review successful
+                  Report successful
                 </Dialog.Title>
                 <form onSubmit={handleSubmit}>
                   <div className="mt-2">
@@ -103,7 +104,7 @@ const ReviewModal = ({ agent, title, closeModal, reviewModalIsOpen }) => {
                         className="block rounded-md focus:[#1c4456] w-full h-32 px-4 py-3 text-gray-800  border border-[#1c4456] focus:outline-[#1c4456] "
                         name="description"
                         required
-                        placeholder="Minimum 10 characters "
+                        placeholder="Minimum 10 characters....."
                       ></textarea>
                     </div>
                   </div>
@@ -133,4 +134,4 @@ const ReviewModal = ({ agent, title, closeModal, reviewModalIsOpen }) => {
   );
 };
 
-export default ReviewModal;
+export default ReportModal;

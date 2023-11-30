@@ -9,9 +9,8 @@ const AllReviews = () => {
       setIsLoading(true);
       try {
         const data = await getAllReviews();
-        // Sort reviews based on reviewDate in descending order
         data.sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate));
-        setReviews(data.slice(0, 3)); // Display the first three reviews
+        setReviews(data.slice(0, 3));
       } catch (error) {
         console.error("Error fetching reviews:", error);
       } finally {
@@ -21,7 +20,6 @@ const AllReviews = () => {
 
     fetchReviews();
   }, []);
-  // console.log(reviews);
   return (
     <div className="bg-[#F5FCFF]">
       {isLoading ? (

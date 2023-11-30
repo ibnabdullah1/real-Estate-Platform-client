@@ -2,24 +2,25 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Api/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import { ImSpinner8 } from "react-icons/im";
+import { Helmet } from "react-helmet-async";
 
 const SoldProperties = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const {
-    refetch,
-    data: soldProperties = [],
-    isLoading: IsSoldPropertiesLoading,
-  } = useQuery({
-    queryKey: ["requestOffers"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/soldProperties/${user?.email}`);
-      return res.data;
-    },
-  });
+  const { data: soldProperties = [], isLoading: IsSoldPropertiesLoading } =
+    useQuery({
+      queryKey: ["requestOffers"],
+      queryFn: async () => {
+        const res = await axiosSecure.get(`/soldProperties/${user?.email}`);
+        return res.data;
+      },
+    });
 
   return (
     <div className="overflow-x-auto max-w-6xl mx-auto">
+      <Helmet>
+        <title>Real Estate/agent/dashboard/sold properties</title>
+      </Helmet>
       <table className="table w-full">
         {/* head */}
         <thead className="text-left bg-[#1c4456] ">
@@ -48,20 +49,20 @@ const SoldProperties = () => {
               className="p-4 bg-slate-100 border-b border-b-[#1c4456]"
             >
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item?.title}
+                <div className="w-[250px]"> {item?.title}</div>
               </td>
 
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item?.location}
+                <div className="w-[200px]"> {item?.location}</div>
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item?.buyerEmail}
+                <div className="w-[150px]"> {item?.buyerEmail}</div>
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item?.buyerName}
+                <div className="w-[150px]"> {item?.buyerName}</div>
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item?.offerPrice}
+                <div className="w-[150px]"> {item?.offerPrice}</div>
               </td>
             </tr>
           ))}

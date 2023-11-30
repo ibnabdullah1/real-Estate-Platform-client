@@ -19,7 +19,7 @@ const AllAdvisementProperties = () => {
   });
   // console.log(advertisementProperties);
   return (
-    <div className="py-20 bg-[#F5FCFF] min-h-screen">
+    <div className="py-20 bg-[#F5FCFF] min-h-screen px-10">
       <h2 className="text-3xl text-center  text-[#1c4456] mb-10 font-bold uppercase">
         Popular Properties
       </h2>

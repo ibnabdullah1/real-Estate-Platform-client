@@ -31,15 +31,15 @@ const UserWishListCard = ({ wishlist, refetch }) => {
   };
 
   return (
-    <div className="flex max-w-5xl mx-auto justify-start gap-8 mb-7 border  rounded-md border-[#7accf2] items-stretch bg-[#ecf6fb]">
+    <div className="md:flex max-w-5xl mx-auto justify-start gap-8 mb-7 border  rounded-md border-[#7accf2] items-stretch bg-[#ecf6fb]">
       <div className="">
         <img
-          className="overflow-hidden rounded-l-md w-[300px] object-cover h-full"
+          className="overflow-hidden rounded-l-md w-full lg:w-[300px] object-cover h-full"
           src={image}
           alt=""
         />
       </div>
-      <div className=" py-5">
+      <div className=" py-5 px-6">
         <div className="flex gap-2 mb-3">
           <img
             className="w-[40px] border-2 border-[#2b4d5e] h-[40px] rounded-[50%]"

@@ -7,6 +7,7 @@ import {
 } from "../../Api/properties";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Advertisement = () => {
   const { data: reqProperties = [], refetch } = useQuery({
@@ -58,24 +59,12 @@ const Advertisement = () => {
       console.error(error.message);
     }
   };
-  //   const handleRemoveAds = async (item, id) => {
-  //     try {
-  //       await addedAdvertisedStatus(item._id, "Advertise");
-  //       refetch();
-  //       const data = await removeAdvertiseProperty(item, id);
-  //       console.log(data);
-  //       if (data.message === "success") {
-  //         toast.success("Advertisement property added successfully");
-  //       } else {
-  //         toast.error(data.message);
-  //       }
-  //     } catch (error) {
-  //       console.error(error.message);
-  //     }
-  //   };
 
   return (
     <div className="overflow-x-auto max-w-6xl mx-auto">
+      <Helmet>
+        <title>Real Estate/admin/dashboard/Advertisement</title>
+      </Helmet>
       <table className="table w-full">
         {/* head */}
         <thead className="text-left bg-[#1c4456] ">
@@ -112,16 +101,16 @@ const Advertisement = () => {
               </td>
 
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item.title}
+                <div className="w-[200px]"> {item.title}</div>
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item?.agent?.name}
+                <div className="w-[150px]"> {item?.agent?.name}</div>
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                ${item.price}
+                <div className="w-[150px]"> ${item.price}</div>
               </td>
               <td>
-                <div className="flex gap-3 pr-3">
+                <div className="flex gap-3 pr-3 w-[230px]">
                   <button
                     onClick={() => handleAddAdvertise(item)}
                     disabled={item?.adsStatus === "Advertised"}

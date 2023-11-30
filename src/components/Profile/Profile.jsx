@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import useRole from "../../Hooks/useRole";
 
 const Profile = ({ user }) => {
@@ -5,6 +6,9 @@ const Profile = ({ user }) => {
   console.log(role);
   return (
     <div className="max-w-4xl mx-auto bg-[#E3EFF3]">
+      <Helmet>
+        <title>Real Estate/{`${role}/`}dashboard/profile</title>
+      </Helmet>
       <div className="rounded-t-lg h-[200px] overflow-hidden">
         <img
           className="object-cover object-bottom w-full"

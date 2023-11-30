@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getAllRequestedProperties, getReqProperty } from "../../Api/auth";
 import { agentRequestUpdate } from "../../Api/properties";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const ManageProperties = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,6 +43,9 @@ const ManageProperties = () => {
 
   return (
     <div className="overflow-x-auto max-w-6xl mx-auto">
+      <Helmet>
+        <title>Real Estate/admin/dashboard/manage properties</title>
+      </Helmet>
       <table className="table w-full">
         {/* head */}
         <thead className="text-left bg-[#1c4456] ">
@@ -72,21 +76,21 @@ const ManageProperties = () => {
               key={item._id}
               className="p-4 bg-slate-100 border-b border-b-[#1c4456]"
             >
-              <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item?.title}
+              <td className="px-6  py-3 text-left text-xs font-medium   tracking-wider">
+                <div className="w-[200px]">{item?.title}</div>
               </td>
 
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item.location}
+                <div className="w-[200px]"> {item.location}</div>
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item?.agent?.name}
+                <div className="w-[150px]"> {item?.agent?.name}</div>
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
                 {item?.agent?.email}
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                ${item.price}
+                <div className="w-[150px]"> ${item.price}</div>
               </td>
               <td>
                 <div className="flex gap-3 pr-3">

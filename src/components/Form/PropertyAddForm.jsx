@@ -4,7 +4,7 @@ const PropertyAddForm = ({
   uploadButtonText,
 }) => {
   return (
-    <div className="w-full md:max-w-2xl py-20 mt-32 flex flex-col justify-center items-center text-gray-800 rounded-xl bg-white">
+    <div className="w-full px-6 md:max-w-2xl py-20 mt-32 flex flex-col justify-center items-center text-gray-800 rounded-xl bg-white">
       <h2 className="text-3xl text-[#1c4456] mb-5 font-bold uppercase">
         Add Properties
       </h2>

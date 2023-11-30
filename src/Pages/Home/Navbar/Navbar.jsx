@@ -8,8 +8,6 @@ const Navbar = () => {
   let Links = [
     { name: "HOME", link: "/" },
     { name: "ALL PROPERTIES", link: "/all-properties" },
-    { name: "DASHBOARD", link: "/dashboard" },
-    // { name: "LOGIN", link: "/login" },
   ];
   let [open, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
@@ -31,11 +29,11 @@ const Navbar = () => {
 
   const navbarClasses = `navbar justify-between py-2 items-center fixed left-0  right-0 top-0 z-20 ${
     scrolling ? "bg-opacity-30  backdrop-blur-lg" : "bg-opacity-[100%]  "
-  } max-w-7xl mx-auto bg-white text-[#1c4456]`;
+  } bg-white text-[#1c4456]`;
 
   return (
     <div className={navbarClasses}>
-      <div className="max-w-7xl mx-auto lg:flex  items-center justify-between  py-4 lg:px-10 px-3">
+      <div className="max-w-6xl mx-auto lg:flex  items-center justify-between  py-4 lg:px-10 px-3">
         {/* logo section */}
         <div className="flex items-center justify-between">
           <div className="flex  items-center justify-between">

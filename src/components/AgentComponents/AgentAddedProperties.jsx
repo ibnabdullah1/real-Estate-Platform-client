@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import { getAgentProperties } from "../../Api/auth";
 import useAxiosSecure from "../../Api/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import AgentAddedPropertiesCard from "./AgentAddedPropertiesCard";
+import { Helmet } from "react-helmet-async";
 
 const AgentAddedProperties = () => {
   const { user } = useAuth();
@@ -15,9 +14,12 @@ const AgentAddedProperties = () => {
       return res.data;
     },
   });
-  console.log(properties);
+  // console.log(properties);
   return (
     <div>
+      <Helmet>
+        <title>Real Estate/agent/dashboard/added properties</title>
+      </Helmet>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 max-w-4xl mx-auto">
         {properties &&
           properties.map((property, i) => (

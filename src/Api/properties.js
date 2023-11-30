@@ -24,6 +24,7 @@ export const addRequestProperty = async (RequestedPropertyData) => {
     `/requestedProperties`,
     RequestedPropertyData
   );
+  console.log(data);
   return data;
 };
 
@@ -59,7 +60,10 @@ export const RemoveReview = async (id) => {
   const { data } = await axiosPublic.delete(`/review/${id}`);
   return data;
 };
-
+export const ReportPropertyDelete = async (id) => {
+  const { data } = await axiosPublic.delete(`/reportProperty/${id}`);
+  return data;
+};
 // // Fetch all Wishlist for user
 // export const getUserAllWishlist = async (email) => {
 //   const { data } = await axiosPublic(`/wishlists/${email}`);
@@ -71,12 +75,16 @@ export const addReview = async (reviewData) => {
   const { data } = await axiosPublic.post("/reviews", reviewData);
   return data;
 };
-
-// offer a wishlist for user
-export const addOfferRequest = async (offerData) => {
-  const { data } = await axiosPublic.post("/addedOffer", offerData);
+export const addReport = async (reportData) => {
+  const { data } = await axiosPublic.post("/reports", reportData);
   return data;
 };
+
+// offer a wishlist for user
+// export const addOfferRequest = async (offerData) => {
+//   const { data } = await axiosPublic.post("/addedOffers", offerData);
+//   return data;
+// };
 
 // Agent property update
 export const offerRequestStatusUpdate = async (id, message) => {

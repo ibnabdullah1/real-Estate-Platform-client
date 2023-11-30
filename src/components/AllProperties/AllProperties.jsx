@@ -3,6 +3,7 @@ import { getAllProperties } from "../../Api/auth";
 import { IoSearch } from "react-icons/io5";
 import PropertiesCard from "./PropertiesCard";
 import axiosPublic from "../../Api/axiosPublic";
+import { Helmet } from "react-helmet-async";
 const AllProperties = () => {
   const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -63,6 +64,9 @@ const AllProperties = () => {
 
   return (
     <div className="py-20 bg-[#F5FCFF] min-h-screen">
+      <Helmet>
+        <title>Real Estate/All Properties</title>
+      </Helmet>
       <h2 className="text-3xl text-center mt-10  text-[#1c4456] mb-5 font-bold uppercase">
         All Properties
       </h2>

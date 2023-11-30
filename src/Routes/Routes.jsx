@@ -27,6 +27,7 @@ import AdminRoute from "./AdminRoute";
 import AgentRoute from "./AgentRoute";
 import PrivateRoute from "./PrivateRoute";
 import ManageReviews from "../components/AgentComponents/ManageReviews";
+import ManageReports from "../components/AgentComponents/ManageReport";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/properties/${params.id}`),
+          fetch(
+            `https://real-estate-platform-server-eight.vercel.app/properties/${params.id}`
+          ),
       },
     ],
   },
@@ -74,170 +77,137 @@ const router = createBrowserRouter([
       // user Dashboards
       {
         path: "user-profile",
-        element: (
-          <PrivateRoute>
-            <UserProfile />
-          </PrivateRoute>
-        ),
+        element: <UserProfile />,
       },
       {
         path: "wishlist",
-        element: (
-          <PrivateRoute>
-            <UserWishlist />
-          </PrivateRoute>
-        ),
+        element: <UserWishlist />,
       },
       {
         path: "wishlist/offer/:id",
-        element: (
-          <PrivateRoute>
-            <OfferForm />
-          </PrivateRoute>
-        ),
+        element: <OfferForm />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/wishlist/${params.id}`),
+          fetch(
+            `https://real-estate-platform-server-eight.vercel.app/wishlist/${params.id}`
+          ),
       },
       {
         path: "property-bought",
-        element: (
-          <PrivateRoute>
-            {" "}
-            <UserPropertyBought />
-          </PrivateRoute>
-        ),
+        element: <UserPropertyBought />,
       },
       {
         path: "user-reviews",
-        element: (
-          <PrivateRoute>
-            <UserReviews />
-          </PrivateRoute>
-        ),
+        element: <UserReviews />,
       },
       {
         path: "property-bought/payment/:id",
         element: <PaymentPage />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/addedOfferPayment/${params.id}`),
+          fetch(
+            `https://real-estate-platform-server-eight.vercel.app/addedOfferPayment/${params.id}`
+          ),
       },
       // Agent Dashboards
       {
         path: "agent-profile",
         element: (
-          <PrivateRoute>
-            <AgentRoute>
-              <AgentProfile />
-            </AgentRoute>
-          </PrivateRoute>
+          <AgentRoute>
+            <AgentProfile />
+          </AgentRoute>
         ),
       },
       {
         path: "addProperties",
         element: (
-          <PrivateRoute>
-            <AgentRoute>
-              <AddProperties />
-            </AgentRoute>
-          </PrivateRoute>
+          <AgentRoute>
+            <AddProperties />
+          </AgentRoute>
         ),
       },
       {
         path: "added-properties",
         element: (
-          <PrivateRoute>
-            <AgentRoute>
-              <AgentAddedProperties />
-            </AgentRoute>
-          </PrivateRoute>
+          <AgentRoute>
+            <AgentAddedProperties />
+          </AgentRoute>
         ),
       },
       {
         path: "request-offers",
         element: (
-          <PrivateRoute>
-            {" "}
-            <AgentRoute>
-              <RequestOffers />
-            </AgentRoute>
-          </PrivateRoute>
+          <AgentRoute>
+            <RequestOffers />
+          </AgentRoute>
         ),
       },
       {
         path: "sold-properties",
         element: (
-          <PrivateRoute>
-            <AgentRoute>
-              <SoldProperties />
-            </AgentRoute>
-          </PrivateRoute>
+          <AgentRoute>
+            <SoldProperties />
+          </AgentRoute>
         ),
       },
       {
         path: "added-properties/update/:id",
         element: (
-          <PrivateRoute>
-            {" "}
-            <AgentRoute>
-              <UpdateForm />
-            </AgentRoute>
-          </PrivateRoute>
+          <AgentRoute>
+            <UpdateForm />
+          </AgentRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/addedProperty/${params.id}`),
+          fetch(
+            `https://real-estate-platform-server-eight.vercel.app/addedProperty/${params.id}`
+          ),
       },
 
       // Admin Dashboards
       {
         path: "adminProfile",
         element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <AdminProfile />
-            </AdminRoute>
-          </PrivateRoute>
+          <AdminRoute>
+            <AdminProfile />
+          </AdminRoute>
         ),
       },
       {
         path: "manage-users",
         element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <AllUsers />
-            </AdminRoute>
-          </PrivateRoute>
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
         ),
       },
       {
         path: "manage-properties",
         element: (
-          <PrivateRoute>
-            {" "}
-            <AdminRoute>
-              <ManageProperties />
-            </AdminRoute>
-          </PrivateRoute>
+          <AdminRoute>
+            <ManageProperties />
+          </AdminRoute>
         ),
       },
       {
         path: "manage-reviews",
         element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <ManageReviews />
-            </AdminRoute>
-          </PrivateRoute>
+          <AdminRoute>
+            <ManageReviews />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-reports",
+        element: (
+          <AdminRoute>
+            <ManageReports />
+          </AdminRoute>
         ),
       },
       {
         path: "advertisements",
         element: (
-          <PrivateRoute>
-            {" "}
-            <AdminRoute>
-              <Advertisement />
-            </AdminRoute>
-          </PrivateRoute>
+          <AdminRoute>
+            <Advertisement />
+          </AdminRoute>
         ),
       },
     ],

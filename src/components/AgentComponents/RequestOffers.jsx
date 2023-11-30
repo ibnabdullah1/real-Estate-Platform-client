@@ -3,12 +3,16 @@ import useAxiosSecure from "../../Api/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import { offerRequestStatusUpdate } from "../../Api/properties";
+import { Helmet } from "react-helmet-async";
 
 const RequestOffers = () => {
   const { user } = useAuth();
-  const [loading, setLoading] = useState();
   const axiosSecure = useAxiosSecure();
-  const { refetch, data: requestOffers = [] } = useQuery({
+  const {
+    refetch,
+    data: requestOffers = [],
+    isLoading: isRequestOffersLoading,
+  } = useQuery({
     queryKey: ["requestOffers"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/requestOffer/${user?.email}`);
@@ -16,15 +20,24 @@ const RequestOffers = () => {
     },
   });
 
-  const handleOfferRequestStatusUpdate = async (id, status) => {
-    setLoading(true);
+  if (isRequestOffersLoading) {
+    <div className="min-h-[60vh] flex justify-center">
+      <div>
+        <img
+          className="w-14 h-14 animate-spin"
+          src="https://www.svgrepo.com/show/448500/loading.svg"
+          alt="Loading icon"
+        />
+      </div>
+    </div>;
+  }
 
+  const handleOfferRequestStatusUpdate = async (id, status) => {
     try {
       const updateRole = await offerRequestStatusUpdate(id, status);
       if (updateRole.modifiedCount > 0) {
         refetch();
       }
-      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -32,6 +45,9 @@ const RequestOffers = () => {
 
   return (
     <div className="overflow-x-auto max-w-6xl mx-auto">
+      <Helmet>
+        <title>Real Estate/agent/dashboard/request offer properties</title>
+      </Helmet>
       <table className="table w-full">
         {/* head */}
         <thead className="text-left bg-[#1c4456] ">

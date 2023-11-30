@@ -8,13 +8,13 @@ const Banner = () => {
         backgroundPosition: "right center",
         backgroundColor: "#C7E6F4",
         backgroundRepeat: "no-repeat",
-        minHeight: "110vh",
+        minHeight: "700px",
         width: "100%",
       }}
-      className=" flex md:justify-start items-center "
+      className=" flex md:justify-start  items-center"
     >
-      <div className="space-y-3 pl-6 md:pl-16">
-        <h2 className="md:text-5xl text-3xl text-white md:text-[#1c4456] font-bold">
+      <div className="space-y-3 pl-6 md:py-24 ">
+        <h2 className="md:text-4xl lg:text-5xl  text-3xl text-white md:text-[#1c4456] font-bold">
           Find a perfect property <br />
           Where you’ll love to live
         </h2>

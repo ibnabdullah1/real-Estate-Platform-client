@@ -2,17 +2,17 @@ import { useLoaderData } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { addOfferRequest } from "../../Api/properties";
+// import { addOfferRequest } from "../../Api/properties";
 import { split } from "postcss/lib/list";
+import useAxiosSecure from "../../Api/useAxiosSecure";
 
 const OfferForm = () => {
   const { title, location, agent, price, image, _id } = useLoaderData();
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(false);
   const [prices, setPrices] = useState("");
   const [minDate, setMinDate] = useState(getCurrentDate());
-  const minPrice = parseFloat(price.split("-")[0]);
-  console.log(minPrice);
   // date format functions
   function getCurrentDate() {
     const currentDate = new Date();
@@ -67,10 +67,11 @@ const OfferForm = () => {
     console.log(offerData);
 
     try {
-      const data = await addOfferRequest(offerData);
-      console.log(data);
-      if (data.insertedId) {
-        toast.success("Offer Requested successfully!");
+      // const data = await addOfferRequest(offerData);
+      const res = await axiosSecure.post(`/addedOffers`, offerData);
+      console.log(res.data);
+      if (res.data.insertedId) {
+        toast.success("Your Offer Requested successfully!");
       }
       //   navigate("/dashboard/my-listings");
     } catch (err) {

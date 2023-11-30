@@ -1,8 +1,6 @@
 import { IoMdLocate } from "react-icons/io";
-import { MdVerified } from "react-icons/md";
 import { HiCurrencyDollar } from "react-icons/hi2";
 import { RiPassPendingFill, RiSecurePaymentFill } from "react-icons/ri";
-import { ImCancelCircle } from "react-icons/im";
 import PaymentModal from "../../Modal/PaymentModal";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
@@ -21,15 +19,15 @@ const OfferItemCard = ({ offerItem }) => {
   console.log(offerItem);
   const { location, title, image, offerPrice, status, agent, _id } = offerItem;
   return (
-    <div className="flex max-w-5xl mx-auto justify-start gap-8 mb-7 border  rounded-md border-[#7accf2] items-stretch bg-[#ecf6fb]">
+    <div className="lg:flex max-w-5xl mx-auto justify-start gap-8 mb-7 border  rounded-md border-[#7accf2] items-stretch bg-[#ecf6fb]">
       <div className="">
         <img
-          className="overflow-hidden rounded-l-md w-[300px] object-cover h-full"
+          className="overflow-hidden rounded-l-md md:w-full lg:w-[300px] object-cover h-full"
           src={image}
           alt=""
         />
       </div>
-      <div className=" py-5">
+      <div className=" py-5 px-5">
         <h2 className="text-[#2b4d5e] mb-2 font-semibold text-xl">{title}</h2>
         <h2 className="text-base mb-2 text-[#2b4d5e] font-semibold">
           Agent: {agent?.name}

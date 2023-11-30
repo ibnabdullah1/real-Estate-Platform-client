@@ -2,18 +2,22 @@ import { useState } from "react";
 // Components
 import MenuItem from "./MenuItem";
 // Icons
-
+import { TbLogout2 } from "react-icons/tb";
 import { AiOutlineBars } from "react-icons/ai";
-import { BsGraphUp } from "react-icons/bs";
 import useRole from "../../../Hooks/useRole";
 import AgentMenu from "./AgentMenu";
 import UserMenu from "./UserMenu";
 import AdminMenu from "./AdminMenu";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
+  const { user, logout } = useAuth();
 
+  const handleLogOut = () => {
+    return logout();
+  };
   const [role] = useRole();
   // Sidebar Responsive Handler
   const handleToggle = () => {

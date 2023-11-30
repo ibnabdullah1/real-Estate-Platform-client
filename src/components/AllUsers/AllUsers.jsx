@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Api/useAxiosSecure";
 import { useState } from "react";
 import { FindUserData, userRoleUpdate } from "../../Api/properties";
 import { getFraudAgentProperties } from "../../Api/auth";
+import { Helmet } from "react-helmet-async";
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState();
@@ -20,7 +21,11 @@ const AllUsers = () => {
   });
 
   if (isUserLoading) {
-    return "loading....";
+    return (
+      <div className="min-h-[60vh] flex justify-center items-center ">
+        <span className="loading loading-ring loading-lg"></span>
+      </div>
+    );
   }
 
   const handleRoleAdmin = async (id) => {
@@ -70,6 +75,7 @@ const AllUsers = () => {
       }
     });
   };
+
   const handleFraudUser = async (user, id) => {
     console.log(user.email);
     try {
@@ -89,6 +95,9 @@ const AllUsers = () => {
 
   return (
     <div className="overflow-x-auto max-w-6xl mx-auto">
+      <Helmet>
+        <title>Real Estate/admin/dashboard/manage users</title>
+      </Helmet>
       <table className="table w-full">
         {/* head */}
         <thead className="text-left bg-[#1c4456] ">
@@ -106,12 +115,12 @@ const AllUsers = () => {
               Role
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-              Make Admin
+              <div className="w-[100px]"> Make Admin</div>
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-              Make agent
+              <div className="w-[100px]"> Make agent</div>
             </th>
-            <th className="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
               Action
             </th>
           </tr>
@@ -127,7 +136,7 @@ const AllUsers = () => {
               </td>
 
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {user.name}
+                <div className="w-[150px]"> {user.name}</div>
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
                 {user?.email}
@@ -161,21 +170,23 @@ const AllUsers = () => {
                   Agent
                 </button>
               </td>
-              <td className="px-6 py-3 text-center text-xs font-medium   tracking-wider">
-                <button
-                  onClick={() => handleDelete(user)}
-                  className=" text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white"
-                >
-                  Delete
-                </button>
-                {user.role === "agent" && (
+              <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
+                <div className="w-[200px]">
                   <button
-                    onClick={() => handleFraudUser(user, user._id)}
-                    className=" ml-3 text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white "
+                    onClick={() => handleDelete(user)}
+                    className=" text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white"
                   >
-                    Fraud
+                    Delete
                   </button>
-                )}
+                  {user.role === "agent" && (
+                    <button
+                      onClick={() => handleFraudUser(user, user._id)}
+                      className=" ml-3 text-xs px-3 py-2 font-medium  rounded bg-[#f01515] text-white "
+                    >
+                      Fraud
+                    </button>
+                  )}
+                </div>
               </td>
             </tr>
           ))}

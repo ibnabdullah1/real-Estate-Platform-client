@@ -1,17 +1,20 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useRole from "../Hooks/useRole";
+import { ImSpinner8 } from "react-icons/im";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  const [role] = useRole();
+  const [role, isRoleLoading] = useRole();
   const location = useLocation();
-
-  if (loading) {
+  console.log("In admin route", location);
+  console.log("User: ", user);
+  console.log("Role: ", role);
+  if (loading || isRoleLoading) {
     return (
       <>
-        <div className="min-h-[70vh] flex justify-center items-center ">
-          <span className="loading loading-ring loading-lg"></span>
+        <div className="min-h-[60vh] flex justify-center items-center">
+          <ImSpinner8 className="w-14 h-14 text-[#1c4456] animate-spin" />
         </div>
       </>
     );
@@ -21,7 +24,7 @@ const AdminRoute = ({ children }) => {
     return children;
   }
 
-  return <Navigate to="/" state={{ from: location }} replace></Navigate>;
+  return <Navigate state={{ from: location }} to="/login" replace="true" />;
 };
 
 export default AdminRoute;

@@ -5,10 +5,11 @@ import { LuTableProperties } from "react-icons/lu";
 import { MdRateReview } from "react-icons/md";
 import { BsGraphUp } from "react-icons/bs";
 import { RiAdvertisementFill } from "react-icons/ri";
+import { MdReport } from "react-icons/md";
+
 const AdminMenu = () => {
   return (
     <>
-      <MenuItem icon={BsGraphUp} label="Statistics" address="/dashboard" />
       <MenuItem icon={CgProfile} label="Profile" address="adminProfile" />
       <MenuItem
         icon={LuTableProperties}
@@ -24,6 +25,11 @@ const AdminMenu = () => {
         icon={MdRateReview}
         label="Manage Reviews"
         address="manage-reviews"
+      />
+      <MenuItem
+        icon={MdReport}
+        label="Manage Reports"
+        address="manage-reports"
       />
 
       <MenuItem

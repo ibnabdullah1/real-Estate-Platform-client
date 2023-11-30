@@ -3,6 +3,7 @@ import useAxiosSecure from "../../Api/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { RemoveReview } from "../../Api/properties";
+import { Helmet } from "react-helmet-async";
 
 const UserReviews = () => {
   const { user } = useAuth();
@@ -44,22 +45,25 @@ const UserReviews = () => {
 
   //   console.log(reviews);
   return (
-    <div className="overflow-x-auto max-w-6xl mx-auto">
+    <div className="overflow-x-auto max-w-8xl mx-auto">
+      <Helmet>
+        <title>Real Estate/user/dashboard/my reviews</title>
+      </Helmet>
       <table className="table w-full">
         {/* head */}
         <thead className="text-left bg-[#1c4456] ">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-              Property Title
+              Property
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-              Agent Name
+              Agent
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
               Review Time
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-              Review description
+              Review
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
               Action
@@ -82,8 +86,8 @@ const UserReviews = () => {
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
                 {item?.reviewDate}
               </td>
-              <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
-                {item?.reviewDescription}
+              <td className="px-6 py-3   text-left text-xs font-medium   tracking-wider">
+                <div className="w-[500px]">{item?.reviewDescription}</div>
               </td>
               <td className="px-6 py-3 text-left text-xs font-medium   tracking-wider">
                 <button
