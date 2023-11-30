@@ -4,6 +4,7 @@ import { MdEventAvailable } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { CgProfile } from "react-icons/cg";
 import { VscDiffAdded } from "react-icons/vsc";
+import { FcSalesPerformance } from "react-icons/fc";
 
 const AgentMenu = () => {
   return (
@@ -14,6 +15,7 @@ const AgentMenu = () => {
         label="Add Property"
         address="addProperties"
       />
+
       <MenuItem
         icon={BsBuildingFillAdd}
         label="My Added Properties"
@@ -24,6 +26,12 @@ const AgentMenu = () => {
         label="Sold Properties"
         address="sold-properties"
       />
+      <MenuItem
+        icon={FcSalesPerformance}
+        label="Total  Sold properties"
+        address="total-sold-properties"
+      />
+
       <MenuItem
         icon={VscGitPullRequestGoToChanges}
         label="Requested Properties"

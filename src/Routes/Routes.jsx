@@ -28,6 +28,7 @@ import AgentRoute from "./AgentRoute";
 import PrivateRoute from "./PrivateRoute";
 import ManageReviews from "../components/AgentComponents/ManageReviews";
 import ManageReports from "../components/AgentComponents/ManageReport";
+import TotalSoldProperties from "../components/AgentComponents/TotalSoldProperties";
 
 const router = createBrowserRouter([
   {
@@ -52,9 +53,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://real-estate-platform-server-eight.vercel.app/properties/${params.id}`
-          ),
+          fetch(`http://localhost:5000/properties/${params.id}`),
       },
     ],
   },
@@ -87,9 +86,7 @@ const router = createBrowserRouter([
         path: "wishlist/offer/:id",
         element: <OfferForm />,
         loader: ({ params }) =>
-          fetch(
-            `https://real-estate-platform-server-eight.vercel.app/wishlist/${params.id}`
-          ),
+          fetch(`http://localhost:5000/wishlist/${params.id}`),
       },
       {
         path: "property-bought",
@@ -103,9 +100,7 @@ const router = createBrowserRouter([
         path: "property-bought/payment/:id",
         element: <PaymentPage />,
         loader: ({ params }) =>
-          fetch(
-            `https://real-estate-platform-server-eight.vercel.app/addedOfferPayment/${params.id}`
-          ),
+          fetch(`http://localhost:5000/addedOfferPayment/${params.id}`),
       },
       // Agent Dashboards
       {
@@ -149,6 +144,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "total-sold-properties",
+        element: (
+          <AgentRoute>
+            <TotalSoldProperties />
+          </AgentRoute>
+        ),
+      },
+      {
         path: "added-properties/update/:id",
         element: (
           <AgentRoute>
@@ -156,9 +159,7 @@ const router = createBrowserRouter([
           </AgentRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://real-estate-platform-server-eight.vercel.app/addedProperty/${params.id}`
-          ),
+          fetch(`http://localhost:5000/addedProperty/${params.id}`),
       },
 
       // Admin Dashboards

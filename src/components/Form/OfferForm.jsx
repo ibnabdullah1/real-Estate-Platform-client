@@ -2,7 +2,6 @@ import { useLoaderData } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import toast from "react-hot-toast";
-// import { addOfferRequest } from "../../Api/properties";
 import { split } from "postcss/lib/list";
 import useAxiosSecure from "../../Api/useAxiosSecure";
 
@@ -13,7 +12,7 @@ const OfferForm = () => {
   const [loading, setLoading] = useState(false);
   const [prices, setPrices] = useState("");
   const [minDate, setMinDate] = useState(getCurrentDate());
-  // date format functions
+
   function getCurrentDate() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -24,18 +23,6 @@ const OfferForm = () => {
   const handleFocus = () => {
     setMinDate(getCurrentDate());
   };
-  // // Price related functions
-  // const handlePriceChange = (e) => {
-  //   const inputValue = parseFloat(e.target.value);
-  //   // example price = "3000000 - 5500000"
-  //   if (isNaN(inputValue) || inputValue > price) {
-  //     toast.error("Price exceeds the allowed range");
-  //     setPrices("");
-  //   } else {
-  //     setPrices(e.target.value);
-  //   }
-  // };
-
   const handlePriceChange = (e) => {
     const inputValue = parseFloat(e.target.value);
     const [, maxPrice] = price.split("-").map(parseFloat);
@@ -67,13 +54,11 @@ const OfferForm = () => {
     console.log(offerData);
 
     try {
-      // const data = await addOfferRequest(offerData);
       const res = await axiosSecure.post(`/addedOffers`, offerData);
       console.log(res.data);
       if (res.data.insertedId) {
         toast.success("Your Offer Requested successfully!");
       }
-      //   navigate("/dashboard/my-listings");
     } catch (err) {
       toast.error(err.message);
     } finally {

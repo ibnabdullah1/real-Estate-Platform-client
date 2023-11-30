@@ -16,6 +16,8 @@ const PropertiesDetails = () => {
     setReviewModalIsOpen(false);
     setReportModalIsOpen(false);
   }
+  const data = useLoaderData();
+  console.log(data);
   const {
     _id,
     location,
@@ -31,6 +33,7 @@ const PropertiesDetails = () => {
     agent,
     description,
   } = useLoaderData();
+  console.log(image);
   const wishlistData = {
     _id,
     location,
