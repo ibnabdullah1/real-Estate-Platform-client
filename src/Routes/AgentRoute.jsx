@@ -6,9 +6,6 @@ const AgentRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [role, isRoleLoading] = useRole();
   const location = useLocation();
-  console.log("In Agent Route ", location);
-  console.log("User: ", user);
-  console.log("Role: ", role);
 
   if (loading || isRoleLoading) {
     return (

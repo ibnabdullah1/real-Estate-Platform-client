@@ -3,6 +3,7 @@ import { PiGoogleLogoBold } from "react-icons/pi";
 import useAuth from "../../Hooks/useAuth";
 import { imageUpload } from "../../Api/utilis";
 import { saveUser } from "../../Api/auth";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useState } from "react";
@@ -10,8 +11,9 @@ const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [passwordError, setPasswordError] = useState("");
   const from = location?.state?.from?.pathname || "/";
 
   const handleSubmit = async (e) => {
@@ -22,6 +24,13 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0];
+
+    const passwordValidation = validatePassword(password);
+    if (passwordValidation) {
+      setPasswordError(passwordValidation);
+      setLoading(false);
+      return;
+    }
     try {
       // Upload the image
       const imageData = await imageUpload(image);
@@ -52,6 +61,21 @@ const SignUp = () => {
     } catch (e) {
       toast.error(e?.message);
     }
+  };
+  const validatePassword = (password) => {
+    if (password.length < 6) {
+      return "Password must be at least 6 characters long.";
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      return "Password must contain at least one capital letter.";
+    }
+
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      return "Password must contain at least one special character.";
+    }
+
+    return ""; // No errors
   };
 
   return (
@@ -113,15 +137,34 @@ const SignUp = () => {
                   Password
                 </label>
               </div>
-              <input
-                type="password"
-                name="password"
-                autoComplete="new-password"
-                id="password"
-                required
-                placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#1c4456] bg-gray-200 text-gray-900"
-              />
+              <div className="mb-4 relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  autoComplete="new-password"
+                  id="password"
+                  required
+                  placeholder="*******"
+                  className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#1c4456] bg-gray-200 text-gray-900"
+                />
+                <span
+                  className="absolute top-[14px] right-4"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
+                </span>
+              </div>
+              {passwordError && (
+                <p
+                  style={{
+                    color: "red",
+                    fontSize: "0.8rem",
+                    marginTop: "0.5rem",
+                  }}
+                >
+                  {passwordError}
+                </p>
+              )}
             </div>
           </div>
 

@@ -7,9 +7,6 @@ const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [role, isRoleLoading] = useRole();
   const location = useLocation();
-  console.log("In admin route", location);
-  console.log("User: ", user);
-  console.log("Role: ", role);
   if (loading || isRoleLoading) {
     return (
       <>
