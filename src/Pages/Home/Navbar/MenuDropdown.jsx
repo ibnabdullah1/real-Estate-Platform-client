@@ -21,7 +21,7 @@ export default function MenuDropdown() {
       <Menu.Button className=" border-[2px] border-gray-700 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition">
         <div className="hidden md:block">
           <img
-            className="rounded-full h-10 w-10"
+            className="rounded-full h-8 w-8"
             referrerPolicy="no-referrer"
             src={
               user && user.photoURL

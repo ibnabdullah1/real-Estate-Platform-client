@@ -14,12 +14,12 @@ const UserMenu = () => {
         label="Wishlist"
         address="wishlist"
       />
+      <MenuItem icon={GoCodeReview} label="My Reviews" address="user-reviews" />
       <MenuItem
         icon={AiOutlineAppstoreAdd}
         label="Property Bought"
         address="property-bought"
       />
-      <MenuItem icon={GoCodeReview} label="My Reviews" address="user-reviews" />
     </>
   );
 };

@@ -29,6 +29,9 @@ import PrivateRoute from "./PrivateRoute";
 import ManageReviews from "../components/AgentComponents/ManageReviews";
 import ManageReports from "../components/AgentComponents/ManageReport";
 import TotalSoldProperties from "../components/AgentComponents/TotalSoldProperties";
+import Dashboard from "../components/Dashboard/Dashboard";
+import Reviews from "../Pages/Reviews/Reviews";
+import AllAgents from "../Pages/AllAgents/AllAgents";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/reviews",
+        element: <Reviews />,
+      },
+      {
+        path: "/agents",
+        element: <AllAgents />,
       },
 
       {
@@ -76,6 +87,10 @@ const router = createBrowserRouter([
     ),
     children: [
       // user Dashboards
+      {
+        path: "",
+        element: <Dashboard />,
+      },
       {
         path: "user-profile",
         element: <UserProfile />,

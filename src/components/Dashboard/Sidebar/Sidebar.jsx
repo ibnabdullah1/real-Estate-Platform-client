@@ -2,22 +2,17 @@ import { useState } from "react";
 // Components
 import MenuItem from "./MenuItem";
 // Icons
-import { TbLogout2 } from "react-icons/tb";
 import { AiOutlineBars } from "react-icons/ai";
 import useRole from "../../../Hooks/useRole";
 import AgentMenu from "./AgentMenu";
 import UserMenu from "./UserMenu";
 import AdminMenu from "./AdminMenu";
 import { Link } from "react-router-dom";
-import useAuth from "../../../Hooks/useAuth";
+import { MdOutlineDashboardCustomize } from "react-icons/md";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
-  const { user, logout } = useAuth();
 
-  const handleLogOut = () => {
-    return logout();
-  };
   const [role] = useRole();
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -46,19 +41,26 @@ const Sidebar = () => {
           <div className="flex justify-center ">
             <Link to="/">
               <button className="flex items-center rounded-full hover:shadow-xl px-7 py-2  bg-[rgb(19,47,60,0.2)]">
-                <img
-                  className="h-6 w-12"
-                  src="https://i.ibb.co/CmsPLg6/realestate.png"
-                  alt=""
-                />
-                <h2 className="font-semibold text-xl text-white">
-                  Real Estate
-                </h2>
+                <div className="flex  items-center justify-between">
+                  <img
+                    className=" w-10"
+                    src="https://i.ibb.co/KsdtzV6/siderlogo.png"
+                    alt=""
+                  />
+                  <h2 className="font-bold text-2xl uppercase text-white ">
+                    Real <span className="text-[#f49d19]">Estate</span>
+                  </h2>
+                </div>
               </button>
             </Link>
           </div>
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
+              <MenuItem
+                icon={MdOutlineDashboardCustomize}
+                label="Dashboard"
+                address=""
+              />
               {/* Admin menu items */}
               {role === "admin" && <AdminMenu />}
               {/* User Menu Items */}

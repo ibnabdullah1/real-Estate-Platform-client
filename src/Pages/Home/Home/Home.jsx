@@ -3,7 +3,6 @@ import AllAdvisementProperties from "../AllAdvisementProperties/AllAdvisementPro
 import AllReviews from "../AllReviews/AllReviews";
 import Banner from "../Banner/Banner";
 import Feature from "../Feature/Feature";
-import Footer from "../Footer/Footer";
 import PaymentFeature from "../PaymentFeature/PaymentFeature";
 const Home = () => {
   return (
@@ -16,7 +15,6 @@ const Home = () => {
       <Feature />
       <PaymentFeature />
       <AllReviews />
-      <Footer />
     </div>
   );
 };

@@ -8,6 +8,9 @@ const Navbar = () => {
   let Links = [
     { name: "HOME", link: "/" },
     { name: "ALL PROPERTIES", link: "/all-properties" },
+    { name: "REVIEWS", link: "/reviews" },
+    { name: "AGENT LIST", link: "/agents" },
+    { name: "CONTACT", link: "/contact" },
   ];
   let [open, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
@@ -27,7 +30,7 @@ const Navbar = () => {
     };
   }, []);
 
-  const navbarClasses = `navbar justify-between py-2 items-center fixed left-0  right-0 top-0 z-20 ${
+  const navbarClasses = `navbar justify-between items-center fixed left-0  right-0 top-0 z-20 ${
     scrolling ? "bg-opacity-30  backdrop-blur-lg" : "bg-opacity-[100%]  "
   } bg-white text-[#1c4456]`;
 
@@ -38,11 +41,13 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <div className="flex  items-center justify-between">
             <img
-              className="h-10"
-              src="https://i.ibb.co/CmsPLg6/realestate.png"
+              className=" w-10"
+              src="https://i.ibb.co/9HSJFBL/Real-Estatelogo.png"
               alt=""
             />
-            <h2 className="font-bold text-2xl ">Real Estate</h2>
+            <h2 className="font-bold text-2xl uppercase ">
+              Real <span className="text-[#f49d19]">Estate</span>
+            </h2>
           </div>
 
           <div className="flex cursor-pointer gap-3 lg:hidden justify-center items-center">
