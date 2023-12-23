@@ -1,4 +1,4 @@
-##🌟 Some of the features of the website are:🌟
+## 🌟 Some of the features of the website are:🌟
 
 ## website live link: https://realestatecommunity-99b97.web.app/
 
