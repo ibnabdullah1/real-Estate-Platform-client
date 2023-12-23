@@ -1,4 +1,4 @@
-# Some of the features of the website are:
+##🌟 Some of the features of the website are:🌟
 
 ## website live link: https://realestatecommunity-99b97.web.app/
 
@@ -17,7 +17,7 @@ Users are greeted with a comprehensive dashboard that reflects their specific ro
 ## ❄️ Agent Special Features:
 Agents enjoy exclusive features, allowing them to view and manage the properties they have listed. Our platform facilitates seamless CRUD (Create, Read, Update, Delete) operations, with every action accompanied by informative toast or swal alerts. This ensures agents are promptly notified of successful property additions, deletions, or updates.
 
-****Integrated Payment System:
+## ❄️ Integrated Payment System:
 For secure and hassle-free transactions, our platform leverages the renowned Stripe payment system. This ensures that users can confidently complete their purchases and sales with a widely trusted and efficient payment gateway.
 
 ## ❄️ Project Selling Line:
