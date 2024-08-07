@@ -1,130 +1,147 @@
-import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
-import { addWishlist } from "../../Api/properties";
-import toast from "react-hot-toast";
-import useAuth from "../../Hooks/useAuth";
-import ReviewModal from "../../Modal/ReviewModal";
-import ReportModal from "../../Modal/ReportModal";
 import { Helmet } from "react-helmet-async";
+import { FaBed, FaRegHeart, FaSquareParking } from "react-icons/fa6";
+import { GiBathtub } from "react-icons/gi";
+import { GoArrowSwitch } from "react-icons/go";
+import { IoShareSocialOutline } from "react-icons/io5";
+import { PiArrowsInSimpleBold } from "react-icons/pi";
+import { useLoaderData } from "react-router-dom";
 
+import FeaturedAdsProperty from "../FeaturedAdsProperty/FeaturedAdsProperty";
+import FactsAndFeatures from "../PropertyDetails/FactsAndFeatures";
+import FloorPlan from "../PropertyDetails/FloorPlan";
+import PropertyBuyRequest from "../PropertyDetails/PropertyBuyRequest";
+import PropertyConclusion from "../PropertyDetails/PropertyConclusion";
+import PropertyDescription from "../PropertyDetails/PropertyDescription";
+import PropertyImages from "../PropertyDetails/PropertyImages";
+import PropertyLocationMap from "../PropertyDetails/PropertyLocationMap";
+import PropertyOverview from "../PropertyDetails/PropertyOverview";
+import PropertyReviews from "../PropertyDetails/PropertyReviews";
+import PropertyVideo from "../PropertyDetails/PropertyVideo";
+import SendAReview from "../PropertyDetails/SendAReview";
 const PropertiesDetails = () => {
-  const { user } = useAuth();
-  const [loading, setLoading] = useState(false);
-  let [reviewModalIsOpen, setReviewModalIsOpen] = useState(false);
-  let [reportModalIsOpen, setReportModalIsOpen] = useState(false);
-  function closeModal() {
-    setReviewModalIsOpen(false);
-    setReportModalIsOpen(false);
-  }
-  const data = useLoaderData();
-  console.log(data);
   const {
-    _id,
+    name,
     location,
-    bedrooms,
-    bathrooms,
-    rooms,
-    square_footage,
-    year_built,
     price,
+    purpose,
+    number_of_beds,
+    number_of_bathrooms,
+    dimensions,
     image,
-    status,
-    title,
     agent,
     description,
+    category,
   } = useLoaderData();
-  console.log(image);
-  const wishlistData = {
-    _id,
-    location,
-    bedrooms,
-    bathrooms,
-    rooms,
-    square_footage,
-    year_built,
-    price,
-    image,
-    buyerEmail: user?.email,
-    buyerName: user?.displayName,
-    status,
-    title,
-    agent,
-    description,
-  };
-
-  const handleSubmit = async (e) => {
-    setLoading(true);
-    e.preventDefault();
-    try {
-      const data = await addWishlist(wishlistData);
-      console.log(data);
-      if (data.insertedId) {
-        toast.success("Your Property added in wishlist");
-      }
-      const isExist = data?.message?.trim() === "Is already added in wishlist";
-      if (isExist) {
-        toast.error("Is already added in wishlist");
-      }
-    } catch (err) {
-      toast.error(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
-    <div className="py-36 lg:flex md:px-20 px-5 justify-between items-stretch bg-[#f5fcff]">
+    <div className="py-20">
       <Helmet>
         <title>Real Estate/properties/details</title>
       </Helmet>
 
-      <div className="flex-1 rounded-l">
-        <img className="w-full rounded-l" src={image} alt="" />
-      </div>
-      <div className="flex-1 rounded-r border border-[#c7e6f4] p-10 space-y-1">
-        <h2 className="text-2xl font-semibold text-[#1c4456]">{title} </h2>
-        <p className="text-lg text-[#1c4456]">{location} </p>
+      <div>
+        {/* cover with location*/}
+        <div>
+          {/* overview */}
+          <div className="bg-[#f9f7f4] p-5 rounded-md lg:flex justify-between">
+            <div>
+              <div className="flex items-center gap-6">
+                <h2 className="text-3xl font-semibold capitalize">{name}</h2>
+                <button className="bg-primary text-white px-2 rounded py-[1px]">
+                  Featured
+                </button>
+              </div>
+              <p className="text-gray-400 py-2">{location}</p>
+              <div className="flex gap-4 py-2">
+                <p className="text-gray-400 flex items-center gap-2">
+                  <FaBed /> {number_of_beds} Bedroom
+                </p>
+                <p className="text-gray-400 flex items-center gap-2">
+                  <GiBathtub />
+                  {number_of_bathrooms} Bathroom
+                </p>
+                <p className="text-gray-400 flex items-center gap-2">
+                  <FaSquareParking />1 Parking
+                </p>
+                <p className="text-gray-400 flex items-center gap-2">
+                  {" "}
+                  <PiArrowsInSimpleBold /> {dimensions}
+                </p>
+              </div>
 
-        <p className="text-lg text-[#1c4456]">
-          <span className="font-semibold">Price</span>: ${price}
-        </p>
-        <p className="text-lg text-[#1c4456]">
-          <span className="font-semibold">Description</span>: {description}
-        </p>
+              <div className="flex items-center gap-3 my-3">
+                <button className="border border-gray-300 rounded p-2 text-gray-400 hover:bg-primary duration-300 hover:border-primary hover:text-white ">
+                  <IoShareSocialOutline />
+                </button>
+                <button className="border border-gray-300 rounded p-2 text-gray-400 hover:bg-primary duration-300 hover:border-primary hover:text-white ">
+                  <FaRegHeart />
+                </button>
+                <button className="border border-gray-300 rounded p-2 text-gray-400 hover:bg-primary duration-300 hover:border-primary hover:text-white ">
+                  <GoArrowSwitch />
+                </button>
+              </div>
+            </div>
+            <div className="lg:text-right mt-6 lg:mt-0">
+              <div className="flex gap-4 lg:justify-end">
+                <button className="bg-gray-900 text-white px-2 rounded py-[2px] capitalize hover:bg-primary duration-300">
+                  {category}
+                </button>
+                <button className="bg-gray-900 text-white px-2 rounded py-[2px] capitalize hover:bg-primary duration-300">
+                  For {purpose}
+                </button>
+              </div>
+              <p className="text-4xl font-semibold text-primary mt-6">
+                ${price}
+              </p>
+              <div className="flex items-center gap-3 mt-4">
+                <img
+                  src={agent.agentImage}
+                  alt=""
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+                <h2 className="text-gray-500">{agent.name}</h2>
+              </div>
+            </div>
+          </div>
+          {/* Images */}
 
-        <button
-          onClick={handleSubmit}
-          className="mt-4 transform duration-500 px-4 py-3 text-sm font-medium  border bg-[#3f6c81] border-[#1c4456] rounded hover:bg-[#1c4456] text-white active:bg-#1c4456 focus:outline-none focus:ring-none"
-        >
-          Add to wishlist
-        </button>
+          <PropertyImages image={image} />
+          {/* Others  */}
 
-        <ReviewModal
-          closeModal={closeModal}
-          agent={agent}
-          reviewModalIsOpen={reviewModalIsOpen}
-          title={title}
-        />
-        <ReportModal
-          closeModal={closeModal}
-          agent={agent}
-          reportModalIsOpen={reportModalIsOpen}
-          title={title}
-          _id={_id}
-        />
-
-        <button
-          onClick={() => setReviewModalIsOpen(true)}
-          className="transform ml-3 duration-500 px-4 py-3 text-sm font-medium  border bg-[#3f6c81] border-[#1c4456] rounded hover:bg-[#1c4456] text-white active:bg-#1c4456 focus:outline-none focus:ring-none"
-        >
-          Add a review
-        </button>
-        <button
-          onClick={() => setReportModalIsOpen(true)}
-          className="transform ml-3 duration-500 px-4 py-3 text-sm font-medium  border bg-[#3f6c81] border-[#1c4456] rounded hover:bg-[#1c4456] text-white active:bg-#1c4456 focus:outline-none focus:ring-none"
-        >
-          Add a report
-        </button>
+          <div className="lg:grid  lg:grid-cols-3 mt-4 gap-4">
+            <div className="lg:col-span-2 space-y-4 w-full">
+              <PropertyDescription description={description} />
+              <PropertyOverview
+                number_of_beds={number_of_beds}
+                number_of_bathrooms={number_of_bathrooms}
+                dimensions={dimensions}
+                category={category}
+              />
+              {/*Fact and features  */}
+              <FactsAndFeatures />
+              {/* Floor Plan */}
+              <FloorPlan
+                number_of_beds={number_of_beds}
+                number_of_bathrooms={number_of_bathrooms}
+                dimensions={dimensions}
+              />
+              {/* Property Video */}
+              <PropertyVideo />
+              {/* Property Map */}
+              <PropertyLocationMap location={location} />
+              <PropertyConclusion />
+              {/* Property Review */}
+              <PropertyReviews />
+              <SendAReview />
+            </div>
+            <div className="lg:col-span-1">
+              <div className="lg:sticky lg:top-10">
+                <PropertyBuyRequest />
+                <FeaturedAdsProperty />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

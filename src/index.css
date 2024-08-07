@@ -1,3 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+.heading {
+  @apply text-xl lg:text-3xl font-bold capitalize text-secondary dark:text-slate-300;
+}
+
+.sub-heading {
+  @apply text-primary text-sm uppercase w-fit bg-primary/20 px-3 py-[3px] rounded-full mb-3 max-w-[200px];
+}
+.btn {
+  @apply px-4 py-[0.35rem] rounded transition-a sm:cursor-pointer !uppercase flex-shrink-0;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:bg-[#f7751e] shadow-md shadow-primary/60;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-white hover:bg-[#02293e];
+}
+.icon-box {
+  @apply grid flex-shrink-0 rounded-full w-9 h-9 place-items-center hover:bg-slate-200 transition-a sm:cursor-pointer;
+}
+.back-to-top-btn {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.back-to-top-btn.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wb-pagination {
+  @apply flex-align-center sm:flex-center-center mt-4 w-full px-4 select-none max-w-[300px] sm:max-w-fit overflow-auto mx-auto;
+}
+
+.wb-pagination::-webkit-scrollbar {
+  @apply hidden;
+}
+
+.wb-pagination .pagination-item {
+  @apply p-2;
+}
+
+.wb-pagination .pagination-item .pagination-link {
+  @apply grid w-8 h-8 mx-3 text-sm text-inherit place-items-center;
+}
+
+.wb-pagination .prev,
+.wb-pagination .next {
+  @apply inline-flex text-primary;
+}
+
+.wb-pagination .prev {
+  @apply mr-4;
+}
+.wb-pagination .next {
+  @apply ml-4;
+}
+
+.disabled {
+  @apply opacity-40;
+}
+
+.wb-pagination .pagination-item.pagination-link-active .pagination-link {
+  @apply text-white rounded-lg shadow-md bg-primary shadow-primary/60;
+}
+
+.test-color {
+  color: rgba(213, 211, 211, 0.192);
+}
+
+/* Filter dialog and modal */
+.filter-modal {
+  @apply fixed top-0 left-0 z-50 w-full h-full transition-opacity opacity-0 pointer-events-none bg-black/10 lg:static lg:opacity-100 lg:pointer-events-auto lg:bg-transparent;
+}
+
+.filter-dialog {
+  @apply absolute top-0 md:top-16 lg:top-0 right-0 p-3 lg:p-0 bg-white  h-screen max-w-[300px] translate-x-[500px] w-full max-h-screen overflow-auto transition-transform lg:static lg:max-w-full lg:translate-x-0 lg:max-h-fit lg:h-fit;
+}
+
+.mobile-modal.open,
+.filter-modal.open,
+.mobile-dialog.open,
+.filter-dialog.open {
+  @apply translate-x-0 opacity-100 pointer-events-auto;
+}
+
+.modal.open,
+.dialog.open {
+  @apply translate-x-0 opacity-100 pointer-events-auto;
+}
+
+.test-color {
+  color: #353949;
+}
+
+.dropdown.show {
+  @apply block;
+}
+/* Filter */
+.filter {
+  @apply w-full px-3 py-2 border outline-none  bg-slate-100;
+}
+
+/* Check box & radio box */
+.input-check label,
+.input-radio label {
+  @apply relative flex items-center cursor-pointer select-none;
+}
+
+.input-check input[type="checkbox"],
+.input-radio input[type="radio"] {
+  @apply absolute opacity-0 cursor-pointer;
+}
+
+.input-check label::before {
+  content: "";
+  @apply w-4 h-4 mr-2 border rounded border-primary;
+}
+
+.input-check input[type="checkbox"]:checked + label::before {
+  content: "✔";
+  @apply grid place-items-center text-slate-100 text-[0.7rem] bg-primary;
+}
+
+.input-radio label::before {
+  content: "";
+  @apply w-4 h-4 mr-2 rounded-full border !border-primary;
+}
+.input-radio label::after {
+  content: "";
+  @apply absolute w-2 h-2 top-1/2 left-0 -translate-y-1/2 scale-0 ml-[0.25rem] bg-primary transition-a rounded-full;
+}
+
+.input-radio input[type="radio"]:checked + label::after {
+  @apply scale-100 -translate-y-1/2;
+}

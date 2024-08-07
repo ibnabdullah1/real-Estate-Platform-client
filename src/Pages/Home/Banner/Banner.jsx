@@ -1,31 +1,53 @@
-import { SlCursor } from "react-icons/sl";
-import "./Banner.css";
+import hero4 from "../../../assets/images/hero-4.png";
+import heroBg from "../../../assets/images/hero-bg-pattern.png";
 const Banner = () => {
   return (
     <div
+      className=" md:flex justify-between items-end md:items-center bg-red-400 pt-16"
       style={{
-        backgroundImage: "url('https://i.ibb.co/n1jKrSL/hero.webp')",
-        backgroundPosition: "right center",
-        backgroundColor: "#C7E6F4",
+        background: `url(${heroBg})`,
         backgroundRepeat: "no-repeat",
-        minHeight: "700px",
-        width: "100%",
+        backgroundSize: "contain",
       }}
-      className=" flex md:justify-start  items-center"
     >
-      <div className="space-y-3 pl-6 md:py-24 ">
-        <h2 className="md:text-4xl lg:text-5xl  text-3xl text-white md:text-[#1c4456] font-bold">
-          Find a perfect property <br />
-          Where you’ll love to live
-        </h2>
-        <p className="text-xl text-white md:text-[#1c4456] md:w-[600px]">
-          We helps businesses customize, automate and scale up their ad
-          production and delivery.
-        </p>
-
-        <button className="flex justify-center gap-2 items-center transform duration-500 px-12 py-3 text-sm font-medium text-[#1c4456] border border-[#1c4456] rounded hover:bg-[#1c4456] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none">
-          Explore More <SlCursor />
+      <div className="absolute top-0 right-0 rounded-full bg-[#04a7ff]/30  w-72 h-72 -z-10 blur-[120px]"></div>
+      <div className="flex-1 ">
+        <h1 className="text-3xl font-semibold capitalize lg:text-5xl">
+          property consisting <br /> land and buildings
+        </h1>
+        <div className="pl-3 mt-5 border-l-4 border-primary">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic nulla
+            unde exercitationem! Recusandae error quaerat sapiente quibusdam
+            culpa magni eius?
+          </p>
+        </div>
+        <button className="mt-6 px-3 py-2 rounded-md text-white uppercase bg-primary">
+          get started
         </button>
+        <div className="mt-6 text-center flex items-center gap-x-4">
+          <div>
+            <h1 className="md:text-xl lg:text-3xl font-bold">
+              12k <span className="text-lg text-primary">+</span>
+            </h1>
+            <p>Requested Projects</p>
+          </div>
+          <div>
+            <h1 className="md:text-xl lg:text-3xl font-bold">
+              15k <span className="text-lg text-primary">+</span>
+            </h1>
+            <p>Projects Completed</p>
+          </div>
+          <div>
+            <h1 className="md:text-xl lg:text-3xl font-bold">
+              100 <span className="text-lg text-primary">+</span>
+            </h1>
+            <p>Served Clients</p>
+          </div>
+        </div>
+      </div>
+      <div className=" w-[320px] lg:w-[600px]  ">
+        <img src={hero4} alt="" className="w-ful" />
       </div>
     </div>
   );

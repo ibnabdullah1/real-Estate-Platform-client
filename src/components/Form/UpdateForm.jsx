@@ -47,10 +47,6 @@ const UpdateForm = () => {
   };
   return (
     <div className="w-full px-6 md:max-w-2xl mx-auto py-10  flex flex-col justify-center items-center text-gray-800 rounded-xl bg-white">
-      <h2 className="text-3xl text-[#1c4456] mb-5 font-bold uppercase">
-        Give a offer
-      </h2>
-
       <form onSubmit={handleSubmit}>
         <div className="space-y-6">
           <div className="space-y-1 text-sm">

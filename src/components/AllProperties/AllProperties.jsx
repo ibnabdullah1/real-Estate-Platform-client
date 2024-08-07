@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getAllProperties } from "../../Api/auth";
-import { IoSearch } from "react-icons/io5";
-import PropertiesCard from "./PropertiesCard";
-import axiosPublic from "../../Api/axiosPublic";
 import { Helmet } from "react-helmet-async";
+import { IoSearch } from "react-icons/io5";
+import { getAllProperties } from "../../Api/auth";
+import axiosPublic from "../../Api/axiosPublic";
+import SingleProductCard from "../SingleProductCard";
 const AllProperties = () => {
   const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,6 @@ const AllProperties = () => {
           setIsLoading(false);
           setProperties(data.data);
         }
-        console.log(data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -44,22 +43,8 @@ const AllProperties = () => {
     setSortOrder(selectedSortOrder);
 
     const sortedData = [...properties];
-    if (selectedSortOrder === "-1") {
-      sortedData.sort(
-        (a, b) => getPriceRange(b.price) - getPriceRange(a.price)
-      );
-    } else if (selectedSortOrder === "1") {
-      sortedData.sort(
-        (a, b) => getPriceRange(a.price) - getPriceRange(b.price)
-      );
-    }
 
     setProperties(sortedData);
-  };
-
-  const getPriceRange = (priceString) => {
-    const [lowerBound] = priceString.split("-");
-    return parseInt(lowerBound, 10);
   };
 
   return (
@@ -124,7 +109,7 @@ const AllProperties = () => {
       ) : properties.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3 max-w-6xl mx-auto">
           {properties.map((property, i) => (
-            <PropertiesCard key={i} property={property} />
+            <SingleProductCard key={i} {...property} />
           ))}
         </div>
       ) : (

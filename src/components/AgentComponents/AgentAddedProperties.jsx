@@ -1,8 +1,8 @@
-import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Api/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import AgentAddedPropertiesCard from "./AgentAddedPropertiesCard";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../Api/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
+import AgentAddedPropertiesCard from "./AgentAddedPropertiesCard";
 
 const AgentAddedProperties = () => {
   const { user } = useAuth();

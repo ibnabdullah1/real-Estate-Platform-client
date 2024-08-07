@@ -1,22 +1,21 @@
-import { NavLink } from "react-router-dom";
-
+import { BiArrowBack } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import NotFoundImg from "../../assets/images/404.png";
 const ErrorPage = () => {
   return (
-    <div className="flex text-center justify-center items-center min-h-[80vh]">
-      <div className=" space-y-3">
-        <div>
-          <img
-            className="md:w-[300px]"
-            src="https://realstatic-nextjs.vercel.app/images/error.svg"
-            alt=""
-          />
-        </div>
-        <p className="text-2xl font-semibold ">Something went wrong!</p>
-        <NavLink to="/">
-          <button className=" inline-block px-12 py-3 text-sm font-medium text-[#1c4456] border border-[#1c4456] rounded hover:bg-[#1c4456] hover:text-white active:bg-[#1c4456] focus:outline-none focus:ring-none">
-            Home Page
-          </button>
-        </NavLink>
+    <div className="flex text-center justify-center items-center min-h-screen ">
+      <div className="flex-col text-center flex-center-center">
+        <img src={NotFoundImg} alt="" className="w-[300px] -mt-20" />
+        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold opacity-50">
+          Page Not Found!!
+        </h1>
+        <Link
+          to={"/"}
+          className="gap-2 mt-4 btn btn-primary flex-center-center"
+        >
+          <BiArrowBack />
+          <span>go back</span>
+        </Link>
       </div>
     </div>
   );

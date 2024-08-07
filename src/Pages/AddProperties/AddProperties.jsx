@@ -1,10 +1,12 @@
 import { useState } from "react";
-import useAuth from "../../Hooks/useAuth";
-import { imageUpload } from "../../Api/utilis";
-import toast from "react-hot-toast";
-import PropertyAddForm from "../../components/Form/PropertyAddForm";
-import { addRequestProperty } from "../../Api/properties";
 import { Helmet } from "react-helmet-async";
+// import toast from "react-hot-toast";
+// import { addRequestProperty } from "../../Api/properties";
+import toast from "react-hot-toast";
+import { addRequestProperty } from "../../Api/properties";
+import { imageUpload } from "../../Api/utilis";
+import PropertyAddForm from "../../components/Form/PropertyAddForm";
+import useAuth from "../../Hooks/useAuth";
 
 const AddProperties = () => {
   const { user } = useAuth();
@@ -14,42 +16,43 @@ const AddProperties = () => {
     setLoading(true);
     e.preventDefault();
     const form = e.target;
-    const title = form.title.value;
+    const name = form.name.value;
+    const category = form.category.value;
+    const purpose = form.purpose.value;
     const location = form.location.value;
-    const image = form.image.files[0];
-    const year_built = parseInt(form.year_built.value);
-    const square_footage = parseInt(form.square_footage.value);
-    const rooms = parseInt(form.room.value);
-    const bedrooms = parseInt(form.bedrooms.value);
-    const bathrooms = parseInt(form.bathrooms.value);
-    const price1 = form.price1.value;
-    const price2 = form.price2.value;
+    const distance = form.distance.value;
+    const dimensions = form.dimensions.value;
+    const number_of_beds = parseInt(form.bedrooms.value);
+    const number_of_bathrooms = parseInt(form.bathrooms.value);
+    const price = parseInt(form.price.value);
     const description = form.description.value;
+    const image = form.image.files[0];
     const agent = {
       name: user?.displayName,
       agentImage: user?.photoURL,
       email: user?.email,
     };
     const image_url = await imageUpload(image);
-    const price = `${price1}-${price2}`;
+
     const RequestedPropertyData = {
+      name,
+      category,
+      purpose,
       location,
-      title,
+      distance: `${distance}km`,
+      dimensions: `${dimensions} sq ft`,
+      number_of_beds,
+      number_of_bathrooms,
       price,
-      year_built,
-      square_footage,
-      rooms,
-      bathrooms,
-      bedrooms,
       agent,
       description,
+      contact: "+256 775 358738",
       image: image_url?.data?.display_url,
       status: "verify",
     };
-    console.log(RequestedPropertyData);
+
     try {
       const data = await addRequestProperty(RequestedPropertyData);
-      console.log(data);
       if (data.insertedId) {
         toast.success("Property Requested successfully!");
         setUploadButtonText("Uploaded!");

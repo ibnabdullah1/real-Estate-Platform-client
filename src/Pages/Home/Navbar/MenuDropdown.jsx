@@ -1,14 +1,14 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import useAuth from "../../../Hooks/useAuth";
+import { FaRegUserCircle } from "react-icons/fa";
 import { LuLogOut } from "react-icons/lu";
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaRegUserCircle } from "react-icons/fa";
+import useAuth from "../../../Hooks/useAuth";
 
-import { Link } from "react-router-dom";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
-import useRole from "../../../Hooks/useRole";
 import { PiUserCircleGearFill } from "react-icons/pi";
+import { Link } from "react-router-dom";
+import useRole from "../../../Hooks/useRole";
 export default function MenuDropdown() {
   const { user, logout } = useAuth();
   const [role] = useRole();
@@ -19,7 +19,7 @@ export default function MenuDropdown() {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <Menu.Button className=" border-[2px] border-gray-700 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition">
-        <div className="hidden md:block">
+        <div className="">
           <img
             className="rounded-full h-8 w-8"
             referrerPolicy="no-referrer"

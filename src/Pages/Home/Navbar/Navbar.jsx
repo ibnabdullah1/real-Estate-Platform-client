@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { FaBars } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+import { FaBars } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import MenuDropdown from "./MenuDropdown";
 
 const Navbar = () => {
   let Links = [
-    { name: "HOME", link: "/" },
-    { name: "ALL PROPERTIES", link: "/all-properties" },
-    { name: "REVIEWS", link: "/reviews" },
-    { name: "AGENT LIST", link: "/agents" },
-    { name: "CONTACT", link: "/contact" },
+    { name: "Home", link: "/" },
+    { name: "About Us", link: "/about-us" },
+    { name: "Services", link: "/services" },
+    { name: "Properties", link: "/properties" },
+    { name: "All Properties", link: "/all-properties" },
+    { name: "Reviews", link: "/reviews" },
+    { name: "Our Agents", link: "/agents" },
+    { name: "Contact Us", link: "/contact" },
   ];
   let [open, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
@@ -30,22 +33,22 @@ const Navbar = () => {
     };
   }, []);
 
-  const navbarClasses = `navbar justify-between items-center fixed left-0  right-0 top-0 z-20 ${
-    scrolling ? "bg-opacity-30  backdrop-blur-lg" : "bg-opacity-[100%]  "
+  const navbarClasses = ` justify-between items-center sticky left-0  right-0 top-0 z-20 ${
+    scrolling ? "bg-opacity-60  backdrop-blur-lg" : "bg-opacity-[100%]  "
   } bg-white text-[#1c4456]`;
 
   return (
     <div className={navbarClasses}>
-      <div className="max-w-6xl mx-auto lg:flex  items-center justify-between  py-4 lg:px-10 px-3">
+      <div className="max-w-7xl mx-auto lg:flex  items-center justify-between  py-2 lg:px-10 px-3">
         {/* logo section */}
         <div className="flex items-center justify-between">
-          <div className="flex  items-center justify-between">
+          <div className="flex  items-end justify-between">
             <img
-              className=" w-10"
+              className="w-10"
               src="https://i.ibb.co/9HSJFBL/Real-Estatelogo.png"
               alt=""
             />
-            <h2 className="font-bold text-2xl uppercase ">
+            <h2 className="font-bold text-2xl  text-secondary">
               Real <span className="text-[#f49d19]">Estate</span>
             </h2>
           </div>
@@ -71,7 +74,7 @@ const Navbar = () => {
           }`}
         >
           {Links.map((link, i) => (
-            <li key={i} className="md:ml-8 lg:my-0 my-7 font-semibold">
+            <li key={i} className="ml-4 lg:my-0 my-7">
               <NavLink
                 to={link.link}
                 onClick={() => setOpen(false)}
@@ -79,8 +82,8 @@ const Navbar = () => {
                   isPending
                     ? "pending"
                     : isActive
-                    ? " border-b-[3px]  border-b-[#1c4456] font-semibold "
-                    : ""
+                    ? " border-b-[2px] text-primary border-b-primary"
+                    : "text-secondary"
                 }
               >
                 {link.name}

@@ -1,0 +1,31 @@
+.swiper-pagination {
+  margin-top: 20px;
+  position: relative !important;
+  text-align: center;
+  transition: 300ms opacity;
+  transform: translate3d(0, 0, 0);
+  z-index: 10;
+}
+.swiper-pagination-bullet {
+  width: 3.5px;
+  height: 3.5px;
+  display: inline-block;
+  border-radius: 0%;
+  background: #ff6400;
+  transition-duration: 0.5s;
+}
+.swiper-pagination-bullet-active {
+  background: #ff6400;
+  height: 3.5px;
+  width: 50px;
+  border-radius: 0%;
+}
+.button {
+  color: #ff6400;
+  border: 1px solid #ff6400;
+}
+.button:hover {
+  background-color: #ff6400;
+  color: white;
+  border: 1px solid #ff6400;
+}

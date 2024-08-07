@@ -1,37 +1,39 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../Layout/MainLayout";
-import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import Login from "../Pages/Login/Login";
-import SignUp from "../Pages/SignUp/SignUp";
-import Home from "../Pages/Home/Home/Home";
-import AddProperties from "../Pages/AddProperties/AddProperties";
+import AdminProfile from "../components/AdminComponents/AdminProfile";
+import Advertisement from "../components/AdminComponents/Advertisement";
+import ManageProperties from "../components/AdminComponents/ManageProperties";
+import AgentProfile from "../components/AgentComponents/AgentProfile";
+import ManageReports from "../components/AgentComponents/ManageReport";
+import ManageReviews from "../components/AgentComponents/ManageReviews";
+import RequestOffers from "../components/AgentComponents/RequestOffers";
+import SoldProperties from "../components/AgentComponents/SoldProperties";
+import TotalSoldProperties from "../components/AgentComponents/TotalSoldProperties";
 import AllProperties from "../components/AllProperties/AllProperties";
 import PropertiesDetails from "../components/AllProperties/PropertiesDetails";
-import DashboardLayout from "../Layout/DashboardLayout";
-import UserProfile from "../components/UserComponents/UserProfile";
-import UserWishlist from "../components/UserComponents/UserWishlist";
-import UserPropertyBought from "../components/UserComponents/UserPropertyBought";
-import AgentProfile from "../components/AgentComponents/AgentProfile";
-import AdminProfile from "../components/AdminComponents/AdminProfile";
-import OfferForm from "../components/Form/OfferForm";
-import ManageProperties from "../components/AdminComponents/ManageProperties";
-import AgentAddedProperties from "../components/AgentComponents/AgentAddedproperties";
+import PropertyFive from "../components/AllProperties/PropertyFive";
 import AllUsers from "../components/AllUsers/AllUsers";
+import Dashboard from "../components/Dashboard/Dashboard";
+import OfferForm from "../components/Form/OfferForm";
 import UpdateForm from "../components/Form/UpdateForm";
-import RequestOffers from "../components/AgentComponents/RequestOffers";
 import PaymentPage from "../components/UserComponents/PaymentPage";
-import Advertisement from "../components/AdminComponents/Advertisement";
-import SoldProperties from "../components/AgentComponents/SoldProperties";
+import UserProfile from "../components/UserComponents/UserProfile";
+import UserPropertyBought from "../components/UserComponents/UserPropertyBought";
 import UserReviews from "../components/UserComponents/UserReviews";
+import UserWishlist from "../components/UserComponents/UserWishlist";
+import DashboardLayout from "../Layout/DashboardLayout";
+import MainLayout from "../Layout/MainLayout";
+import About from "../Pages/About/About";
+import AddProperties from "../Pages/AddProperties/AddProperties";
+import AllAgents from "../Pages/AllAgents/AllAgents";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Home from "../Pages/Home/Home/Home";
+import Login from "../Pages/Login/Login";
+import Reviews from "../Pages/Reviews/Reviews";
+import Service from "../Pages/services/Service";
+import SignUp from "../Pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
 import AgentRoute from "./AgentRoute";
 import PrivateRoute from "./PrivateRoute";
-import ManageReviews from "../components/AgentComponents/ManageReviews";
-import ManageReports from "../components/AgentComponents/ManageReport";
-import TotalSoldProperties from "../components/AgentComponents/TotalSoldProperties";
-import Dashboard from "../components/Dashboard/Dashboard";
-import Reviews from "../Pages/Reviews/Reviews";
-import AllAgents from "../Pages/AllAgents/AllAgents";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,18 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/about-us",
+        element: <About />,
+      },
+      {
+        path: "/services",
+        element: <Service />,
+      },
+      {
+        path: "/properties",
+        element: <PropertyFive />,
       },
       {
         path: "/reviews",
@@ -59,14 +73,12 @@ const router = createBrowserRouter([
       {
         path: "/properties/:id",
         element: (
-          <PrivateRoute>
-            <PropertiesDetails />
-          </PrivateRoute>
+          // <PrivateRoute>
+          <PropertiesDetails />
+          // </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://real-estate-platform-server-eight.vercel.app/properties/${params.id}`
-          ),
+          fetch(`http://localhost:3000/properties/${params.id}`),
       },
     ],
   },
@@ -140,14 +152,14 @@ const router = createBrowserRouter([
           </AgentRoute>
         ),
       },
-      {
-        path: "added-properties",
-        element: (
-          <AgentRoute>
-            <AgentAddedProperties />
-          </AgentRoute>
-        ),
-      },
+      // {
+      //   path: "added-properties",
+      //   element: (
+      //     <AgentRoute>
+      //       <AgentAddedProperties />
+      //     </AgentRoute>
+      //   ),
+      // },
       {
         path: "request-offers",
         element: (
