@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -11,6 +12,9 @@ import ReviewsCard from "./ReviewsCard";
 const Reviews = () => {
   return (
     <div className=" pt-2 lg:px-10 px-10 ">
+      <Helmet>
+        <title>Real Estate Community/Reviews</title>
+      </Helmet>
       <div className=" max-w-7xl mx-auto pt-2 pb-16 ">
         <div className="flex justify-between items-end py-8">
           <div className="md:text-center">

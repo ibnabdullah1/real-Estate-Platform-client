@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { faqs } from "../../Data/dummyData";
 
@@ -9,6 +10,9 @@ const FAQs = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-20">
+      <Helmet>
+        <title>Real Estate Community/faqs</title>
+      </Helmet>
       <h2 className="text-center heading my-6">Frequently Asked Questions</h2>
       {faqs?.map((according, index) => (
         <article key={index} className=" p-3">

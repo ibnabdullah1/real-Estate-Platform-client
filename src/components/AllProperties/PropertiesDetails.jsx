@@ -101,7 +101,7 @@ const PropertiesDetails = () => {
   return (
     <div className="py-20">
       <Helmet>
-        <title>Real Estate/properties/details</title>
+        <title>Real Estate/Properties/Details</title>
       </Helmet>
 
       <div>
@@ -110,14 +110,16 @@ const PropertiesDetails = () => {
           {/* overview */}
           <div className="bg-[#f9f7f4] p-5 rounded-md lg:flex justify-between">
             <div>
-              <div className="flex items-center gap-6">
-                <h2 className="text-3xl font-semibold capitalize">{name}</h2>
+              <div className="flex items-center justify-between md:gap-6">
+                <h2 className="text-xl md:text-3xl font-semibold capitalize">
+                  {name}
+                </h2>
                 <button className="bg-primary text-white px-2 rounded py-[1px]">
                   Featured
                 </button>
               </div>
               <p className="text-gray-400 py-2">{location}</p>
-              <div className="flex gap-4 py-2">
+              <div className="flex flex-wrap gap-4 py-2">
                 <p className="text-gray-400 flex items-center gap-2">
                   <FaBed /> {number_of_beds} Bedroom
                 </p>

@@ -21,7 +21,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="max-w-7xl mx-auto  flex justify-between items-center px-8 py-2">
+    <header className="max-w-7xl mx-auto  flex justify-between items-center px-4 lg:px-8 py-2">
       <Link to="/">
         <div className="">
           <div className="flex items-center justify-center font-semibold relative text-2xl text-[#004068] ">

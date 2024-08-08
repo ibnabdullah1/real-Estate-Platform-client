@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <div className="">
       <Helmet>
-        <title>Real Estate/home</title>
+        <title>Real Estate Community/Home</title>
       </Helmet>
       <Banner />
       <Filters />

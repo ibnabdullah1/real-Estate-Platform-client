@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { PiGoogleLogoBold } from "react-icons/pi";
@@ -79,6 +80,9 @@ const SignUp = () => {
 
   return (
     <div className="flex justify-center items-center py-20">
+      <Helmet>
+        <title>Real Estate Community/Sign-up</title>
+      </Helmet>
       <div className="flex flex-col md:min-w-[500px] max-w-lg p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl text-[#1c4456] font-bold">Sign Up</h1>

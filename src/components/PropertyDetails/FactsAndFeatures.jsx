@@ -4,7 +4,7 @@ const FactsAndFeatures = () => {
   return (
     <div className="bg-slate-100 p-5 h-min rounded-md ">
       <p className="text-xl font-semibold my-2">Facts And Features</p>
-      <div className="grid grid-cols-3 space-y-3">
+      <div className="grid md:grid-cols-3 space-y-3">
         <p className="flex items-center gap-2 text-gray-500">
           <IoCheckmarkDone className="text-2xl text-primary" />
           Air Conditioning

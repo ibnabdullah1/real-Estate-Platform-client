@@ -1,6 +1,7 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 import CheckoutForm from "../Form/CheckoutForm";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
@@ -12,6 +13,9 @@ const PaymentPage = () => {
   }
   return (
     <div className="">
+      <Helmet>
+        <title>Real Estate Community/Dashboard/payment</title>
+      </Helmet>
       <div className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
         <h2 className="text-lg font-medium text-center leading-6 text-gray-900">
           Property Details

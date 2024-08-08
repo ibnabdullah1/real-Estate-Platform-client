@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { AgentPropertyUpdate } from "../../Api/properties";
@@ -46,6 +47,9 @@ const UpdateForm = () => {
   };
   return (
     <div className="w-full px-6 md:max-w-3xl mx-auto py-10  flex flex-col justify-center items-center text-gray-800 rounded-xl bg-white">
+      <Helmet>
+        <title>Real Estate Community/Dashboard/update form</title>
+      </Helmet>
       <h2 className="text-3xl text-[#1c4456] mb-5 font-semibold">
         Update Properties
       </h2>

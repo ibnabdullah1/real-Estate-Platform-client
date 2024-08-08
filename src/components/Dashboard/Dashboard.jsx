@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet-async";
+
 const Dashboard = () => {
   return (
     <div className="h-full  mb-10 ">
+      <Helmet>
+        <title>Real Estate Community/Dashboard</title>
+      </Helmet>
       {/* <!-- Statistics Cards --> */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
         <div className="bg-[#1c4456] shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">

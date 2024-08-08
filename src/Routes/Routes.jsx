@@ -111,7 +111,7 @@ const router = createBrowserRouter([
         element: <OfferForm />,
         loader: ({ params }) =>
           fetch(
-            `https://real-estate-platform-server-eight.vercel.app/wishlist/${params.id}`
+            `https://real-estate-community-server.vercel.app/wishlist/${params.id}`
           ),
       },
       {
@@ -127,7 +127,7 @@ const router = createBrowserRouter([
         element: <PaymentPage />,
         loader: ({ params }) =>
           fetch(
-            `https://real-estate-platform-server-eight.vercel.app/addedOfferPayment/${params.id}`
+            `https://real-estate-community-server.vercel.app/addedOfferPayment/${params.id}`
           ),
       },
       // Agent Dashboards
@@ -188,7 +188,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://real-estate-platform-server-eight.vercel.app/addedProperty/${params.id}`
+            `https://real-estate-community-server.vercel.app/addedProperty/${params.id}`
           ),
       },
 

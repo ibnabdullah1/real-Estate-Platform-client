@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import { IoIosSend } from "react-icons/io";
 
 const ContactUs = () => {
   return (
     <section className="text-gray-600 font-questrial relative px-5 py-14">
+      <Helmet>
+        <title>Real Estate Community/Contact Us</title>
+      </Helmet>
       <h1 className="heading text-center">Contact Us</h1>
       <div className="container  mx-auto flex sm:flex-nowrap flex-wrap">
         <div className="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">

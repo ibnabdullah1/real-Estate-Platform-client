@@ -27,11 +27,20 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="bg-gray-100 text-gray-800 flex justify-end lg:hidden">
-        <button
-          onClick={handleToggle}
-          className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-100 text-primary"
+      <div className="bg-white z-10 px-3 py-1 sticky top-0 text-gray-800 flex justify-between items-center lg:hidden">
+        <Link
+          to="/"
+          className="flex items-center justify-center font-semibold relative text-2xl text-[#004068] "
         >
+          <h1>Real</h1>
+          <img
+            className=" w-10"
+            src="https://png.pngtree.com/png-vector/20221014/ourmid/pngtree-house-real-estate-icon-png-image_6319467.png"
+            alt=""
+          />
+          <h3 className="text-primary">Estate</h3>
+        </Link>
+        <button onClick={handleToggle} className=" text-primary">
           {isActive ? (
             <HiMiniBars3 className="text-3xl" />
           ) : (

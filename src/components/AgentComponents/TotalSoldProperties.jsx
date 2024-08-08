@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../Api/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 
@@ -23,6 +24,9 @@ const TotalSoldProperties = () => {
 
   return (
     <div className="px-10">
+      <Helmet>
+        <title>Real Estate Community/Dashboard/total sold properties</title>
+      </Helmet>
       <h2 className="heading">
         Total Sold Price:{" "}
         <span className="text-2xl text-[#ffc933] font-semibold">

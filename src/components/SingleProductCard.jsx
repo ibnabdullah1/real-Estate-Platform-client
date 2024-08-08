@@ -1,5 +1,8 @@
+import toast from "react-hot-toast";
 import { BiBed, BiMap, BiMapAlt, BiTab } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { addWishlist } from "../Api/properties";
+import useAuth from "../Hooks/useAuth";
 import CardHoverIcons from "./CardHoverIcons";
 
 const SingleProductCard = ({
@@ -14,7 +17,53 @@ const SingleProductCard = ({
   dimensions,
   image,
   basis,
+  agent,
+  description,
+  category,
+  status,
 }) => {
+  const { user } = useAuth();
+
+  const wishlistData = {
+    _id,
+    name,
+    location,
+    price,
+    purpose,
+    number_of_beds,
+    number_of_bathrooms,
+    dimensions,
+    image,
+    agent,
+    description,
+    category,
+    buyerEmail: user?.email,
+    buyerName: user?.displayName,
+    status,
+  };
+
+  const handlePropertyAddToWishlist = async (e) => {
+    e.preventDefault();
+    try {
+      if (!user?.email) {
+        return toast.error(
+          "You are not logged in yet. Please log in and try again"
+        );
+      }
+
+      const data = await addWishlist(wishlistData);
+      if (data.insertedId) {
+        toast.success("Your Property added in wishlist");
+      }
+      const isExist = data?.message?.trim() === "Is already added in wishlist";
+      if (isExist) {
+        toast.error("Is already added in wishlist");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
   return (
     <div
       className={`flex-1 ${
@@ -29,7 +78,10 @@ const SingleProductCard = ({
             className="w-full h-fit md:h-[250px] object-cover group-hover:scale-125 transition-a"
           />
         </div>
-        <CardHoverIcons image={image} />
+        <CardHoverIcons
+          handlePropertyAddToWishlist={handlePropertyAddToWishlist}
+          image={image}
+        />
         <div className="absolute bottom-0 left-0 w-full px-2 py-2 transition-transform bg-gradient-to-t from-black/80 sm:translate-y-10 group-hover:translate-y-0 to-transparent">
           <div className="text-white flex-align-center gap-x-2">
             <BiMap />

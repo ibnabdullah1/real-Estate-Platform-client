@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { debounce } from "lodash";
 import { useCallback, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { FiChevronsLeft, FiChevronsRight, FiDelete } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import axiosPublic from "../../Api/axiosPublic";
@@ -102,6 +103,9 @@ const PropertyFive = () => {
 
   return (
     <div className="pt-20 px-[1px] lg:px-[6%]">
+      <Helmet>
+        <title>Real Estate/Our Properties</title>
+      </Helmet>
       <HeaderFilters
         totalItems={totalItems}
         layout={layout}
