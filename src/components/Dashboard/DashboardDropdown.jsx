@@ -1,17 +1,17 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { CiSettings } from "react-icons/ci";
-import { FaUser } from "react-icons/fa6";
 import { GoMail } from "react-icons/go";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoLogInOutline } from "react-icons/io5";
-import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { PiUserCircleFill } from "react-icons/pi";
 import { TbLogin } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../../Hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
 
-const Dropdown = () => {
+const DashboardDropdown = () => {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
   const handleLogout = () => {
     logout();
@@ -20,8 +20,11 @@ const Dropdown = () => {
   return (
     <Menu as="div" className="relative inline-block text-left ">
       <Menu.Button>
-        {user ? (
-          <div className="relative rounded-full top-[2px] flex gap-2 justify-center items-center border-[2px] border-gray-300">
+        {user?.email && (
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="bg-gray-100 relative rounded-full flex gap-2 justify-center items-center md:p-1 border-[2px] top-[2px] border-gray-200"
+          >
             <img
               src={
                 user?.photoURL
@@ -30,13 +33,18 @@ const Dropdown = () => {
               }
               alt={user?.displayName}
               color="green"
-              className="h-[23px] w-[23px] rounded-full "
-            />{" "}
-            <div className="absolute -top-[1px] right-[-2px] w-2 h-2 rounded-full bg-green-500" />
-          </div>
-        ) : (
-          <button className="hover:bg-[#ffcc00] flex justify-center items-center relative border  hover:border hover:border-[#ffcc00] bg-white text-xl  rounded-full hover:text-white">
-            <FaUser />
+              className="h-[26px] w-[26px] md:h-[23px] md:w-[23px] rounded-full "
+            />
+            <div className="absolute flex md:hidden top-[2px] right-[-1px] w-2 h-2 rounded-full bg-green-500" />
+            <p className="md:flex hidden font-semibold text-sm text-[#333333] ">
+              {user?.displayName.slice(0, 10)}.
+            </p>
+
+            {isOpen ? (
+              <IoIosArrowUp className="ml-1 text-gray-600 md:flex hidden " />
+            ) : (
+              <IoIosArrowDown className="ml-1 text-gray-600 md:flex hidden " />
+            )}
           </button>
         )}
       </Menu.Button>
@@ -83,17 +91,7 @@ const Dropdown = () => {
                   Settings
                 </a>
               </div>
-              <div className="" role="none">
-                <Link
-                  to="/dashboard"
-                  className="flex px-4 py-2 cursor-pointer text-sm text-gray-700 border-l-2 border-transparent  hover:border-primary  hover:text-primary"
-                >
-                  <span className="mr-2">
-                    <MdOutlineDashboardCustomize />{" "}
-                  </span>
-                  Dashboard
-                </Link>
-              </div>
+
               <div role="none">
                 <button
                   onClick={handleLogout}
@@ -121,4 +119,4 @@ const Dropdown = () => {
     </Menu>
   );
 };
-export default Dropdown;
+export default DashboardDropdown;

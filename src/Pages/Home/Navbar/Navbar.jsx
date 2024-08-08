@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { HiMiniBars3 } from "react-icons/hi2";
-import { IoClose } from "react-icons/io5";
+import { MdClose } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
+import CartBadge from "../../../components/CartBadge";
+import WishlistIcon from "../../../components/WishlistIcon";
+import useAuth from "../../../Hooks/useAuth";
 import Dropdown from "./MenuDropdown";
 
 const Navbar = () => {
+  const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -36,7 +40,7 @@ const Navbar = () => {
         </div>
       </Link>
       <div
-        className={`fixed top-[63px] bg-white  lg:bg-transparent right-0  px-7 pb-7 pt-4 w-[250px] lg:w-auto h-full overflow-auto transform transition-transform duration-500 ${
+        className={`fixed top-[56px] bg-gray-100  lg:bg-transparent right-0  lg:px-7 pb-7 pt-4 w-[250px] lg:w-auto h-full overflow-auto transform transition-transform duration-500 ${
           isMenuOpen
             ? "translate-x-0  "
             : "translate-x-full lg:translate-x-0   "
@@ -44,13 +48,16 @@ const Navbar = () => {
       >
         <ul className="list-none block bg-opacity-5 lg:flex gap-5">
           {Links.map((item) => (
-            <li key={item.link} className="my-2">
+            <li
+              key={item.link}
+              className="my-2 border-b lg:border-b-0 border-b-gray-300 pb-1 lg:pb-0 px-4 lg:px-0"
+            >
               <NavLink
                 to={item.link}
                 className={({ isActive }) =>
-                  `  duration-300 ${
+                  `  duration-300 lg:pb-[2px] ${
                     isActive
-                      ? "text-orange-500 border-b-2 border-orange-500"
+                      ? "text-orange-500 lg:border-b-2  border-orange-500"
                       : "text-[#333333] hover:text-orange-500"
                   }`
                 }
@@ -62,17 +69,20 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="flex items-center gap-2">
-        <Dropdown />
+        {user?.email && <WishlistIcon />}
 
-        <div className="lg:hidden">
-          <button
-            type="button"
-            className="text-primary text-4xl"
-            onClick={toggleMenu}
-          >
-            {isMenuOpen ? <IoClose /> : <HiMiniBars3 />}
-          </button>
-        </div>
+        <CartBadge />
+        <Dropdown />
+        <button
+          onClick={toggleMenu}
+          className="flex bg-gray-100 rounded-full p-1 lg:hidden text-primary"
+        >
+          {isMenuOpen ? (
+            <MdClose className="text-2xl" />
+          ) : (
+            <HiMiniBars3 className="text-2xl" />
+          )}
+        </button>
       </div>
     </header>
   );
