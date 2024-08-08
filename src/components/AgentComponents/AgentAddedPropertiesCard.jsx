@@ -1,13 +1,45 @@
+import { BiBed, BiMap, BiMapAlt, BiTab } from "react-icons/bi";
 import { GrUpdate } from "react-icons/gr";
-import { FaLocationDot } from "react-icons/fa6";
 import { ImCancelCircle } from "react-icons/im";
 import { Link } from "react-router-dom";
-import { HiCurrencyDollar } from "react-icons/hi2";
-import useAxiosSecure from "../../Api/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const AgentAddedPropertiesCard = ({ property, refetch }) => {
-  const { _id, location, price, image, status, title, agent } = property;
+import useAxiosSecure from "../../Api/useAxiosSecure";
+const AgentAddedPropertiesCard = ({
+  _id,
+  name,
+  location,
+  price,
+  distance,
+  purpose,
+  number_of_beds,
+  number_of_bathrooms,
+  dimensions,
+  image,
+  basis,
+  status,
+  refetch,
+}) => {
+  const statusStyles = {
+    verified: {
+      bgColor: "#FF6400",
+      text: "verified",
+    },
+    verify: {
+      bgColor: "#24d53b",
+      text: "Pending",
+    },
+    rejected: {
+      bgColor: "#f44b0e",
+      text: "rejected",
+    },
+  };
+
+  const statusInfo = statusStyles[status] || {
+    bgColor: "transparent",
+    text: "",
+  };
+
   const axiosSecure = useAxiosSecure();
   const handleDelete = (_id) => {
     Swal.fire({
@@ -20,8 +52,8 @@ const AgentAddedPropertiesCard = ({ property, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/agentProperty/${_id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
+        axiosSecure.put(`/agentPropertyDeletedStatus/${_id}`).then((res) => {
+          if (res.data.acknowledged) {
             refetch();
             Swal.fire("Deleted!", "Your Property has been deleted.", "success");
           }
@@ -31,79 +63,90 @@ const AgentAddedPropertiesCard = ({ property, refetch }) => {
   };
 
   return (
-    <div className=" rounded-md bg-[#F9FDFF]">
-      <div className="">
-        <img
-          className="overflow-hidden object-cover h-[250px] w-full rounded-t-md "
-          src={image}
-          alt=""
-        />
-      </div>
-      <div className="px-5 pt-4 pb-7 border border-t-0 rounded-b-md border-[#7accf2]">
-        <div className="flex justify-between items-center">
-          <div className="flex gap-2 mb-3">
-            <img
-              className="w-[40px] border-2 border-[#2b4d5e] h-[40px] rounded-[50%]"
-              src={agent?.agentImage}
-              alt={agent?.name}
-            />
-            <div>
-              <h2 className="text-base text-[#2b4d5e] font-semibold">
-                {agent?.name}
-              </h2>
-              <h2 className="text-base text-[#2b4d5e] -mt-1 font-semibold">
-                {agent?.email}
-              </h2>
-            </div>
+    <div
+      className={`flex-1 border border-primary/30 ${
+        basis ? basis : "basis-[18rem]"
+      } bg-[#fffcf7]  rounded-lg overflow-hidden relative group`}
+    >
+      <div className="group !opacity-100 overflow-hidden relative">
+        <div className="!opacity-100">
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-fit md:h-[250px] object-cover group-hover:scale-125 transition-a"
+          />
+        </div>
+
+        <div className="absolute bottom-0 left-0 w-full p-2 transition-transform bg-gradient-to-t from-black/80 sm:translate-y-10 group-hover:translate-y-0 to-transparent">
+          <div className="text-white flex-align-center gap-x-2">
+            <BiMap />
+            <p>{location}</p>
           </div>
         </div>
-        <div className="flex justify-between items-stretch">
-          <h2 className="text-[#2b4d5e] mb-3 font-semibold text-xl">{title}</h2>
-          {status === "verified" && (
-            <h4 className="border flex uppercase items-center justify-center bg-[#ffc933] px-2 text-white rounded">
-              {status}
-            </h4>
-          )}
-          {status === "verify" && (
-            <h4 className="border flex uppercase items-center justify-center bg-[#24d53b]  px-2 text-white rounded">
-              Pending
-            </h4>
-          )}
-          {status === "rejected" && (
-            <h4 className="border flex uppercase items-center justify-center bg-[#f44b0e] px-2 text-white rounded">
-              {status}
-            </h4>
-          )}
+      </div>
+      <div className="absolute top-2  left-2 flex-align-center gap-x-2">
+        <span className="py-[3px] px-3 text-sm rounded-full capitalize text-white bg-primary">
+          {distance} away
+        </span>
+        <span className="py-[3px] px-3 text-sm rounded-full capitalize text-white bg-secondary">
+          for {purpose}
+        </span>
+      </div>
+      <div className="p-3">
+        <div className="flex justify-between mt-3">
+          <div className="group-hover:text-primary transition-a">
+            <h1 className="text-lg font-bold capitalize">{name}</h1>
+          </div>
+          <h4
+            className="border py-[3px] px-3 flex text-sm rounded-full capitalize text-white justify-center items-center "
+            style={{ backgroundColor: statusInfo.bgColor }}
+          >
+            {statusInfo.text}
+          </h4>
         </div>
-        <p className="flex text-[#417086] items-center gap-1">
-          <FaLocationDot />
-          {location}
-        </p>
-        <p className="flex text-[#417086]  mb-3 gap-1   items-center ">
-          <HiCurrencyDollar className=" text-xl" />
+        <div className="flex justify-between mt-3">
+          <div className="flex-align-center gap-x-2">
+            <div className="icon-box !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
+              <BiBed />
+            </div>
+            <p className="text-sm">{number_of_beds} Beds</p>
+          </div>
+          <div className="flex-align-center gap-x-2">
+            <div className="icon-box !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
+              <BiTab />
+            </div>
+            <p className="text-sm">{number_of_bathrooms} Bathrooms</p>
+          </div>
+          <div className="flex-align-center gap-x-2">
+            <div className="icon-box !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
+              <BiMapAlt />
+            </div>
+            <p className="text-sm">{dimensions}</p>
+          </div>
+        </div>
 
-          {price}
-        </p>
-        <div className="flex gap-3">
+        <div className="flex gap-3 mt-4 justify-between">
           <Link to={`update/${_id}`}>
             <button
               disabled={status === "rejected"}
-              className={
-                status === "rejected"
-                  ? "flex gap-[4px] justify-center items-center bg-gray-300 text-gray-400 text-sm px-6 py-2  rounded  font-medium "
-                  : "flex gap-[4px] justify-center items-center transform duration-500 px-6 py-2 text-sm font-medium text-[#24d53b] border border-[#24d53b] rounded hover:bg-[#24d53b] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none uppercase"
-              }
+              className={` flex gap-[4px] justify-center items-center font-medium rounded-full
+             px-3 py-[6px] text-xs ${
+               status === "rejected"
+                 ? " bg-gray-300 text-gray-400 "
+                 : " transform duration-500 bg-[#24d53b90] hover:bg-[#24d53b] text-white"
+             }
+              `}
             >
-              <GrUpdate className="text-lg" />
+              <GrUpdate className="text-sm" />
               Update
             </button>
           </Link>
 
           <button
             onClick={() => handleDelete(_id)}
-            className="flex justify-center gap-[2px]  items-center transform duration-500 px-6 py-2 text-sm font-medium text-[#f01515] border border-[#f01515] rounded hover:bg-[#f01515] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none uppercase"
+            className="flex justify-center gap-1 items-center px-3 py-[6px]  font-medium bg-[#f0151590] text-xs transform duration-500 rounded-full hover:bg-[#f01515] text-white "
           >
-            <ImCancelCircle className="text-lg" />
+            <ImCancelCircle className="text-sm" />
             Delete
           </button>
         </div>
@@ -111,4 +154,5 @@ const AgentAddedPropertiesCard = ({ property, refetch }) => {
     </div>
   );
 };
+
 export default AgentAddedPropertiesCard;

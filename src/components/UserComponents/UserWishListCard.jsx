@@ -1,14 +1,23 @@
-import { HiCurrencyDollar } from "react-icons/hi2";
-import { BiSolidOffer } from "react-icons/bi";
-import { IoMdLocate } from "react-icons/io";
-import { ImCancelCircle } from "react-icons/im";
-import { MdVerified } from "react-icons/md";
+import { BiBed, BiMap, BiMapAlt, BiSolidOffer, BiTab } from "react-icons/bi";
+import { MdDeleteSweep, MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { RemoveWishlist } from "../../Api/properties";
 import Swal from "sweetalert2";
-const UserWishListCard = ({ wishlist, refetch }) => {
-  const { location, title, image, price, status, agent, _id } = wishlist;
+import { RemoveWishlist } from "../../Api/properties";
 
+const UserWishListCard = ({
+  _id,
+  name,
+  location,
+  price,
+  description,
+  distance,
+  purpose,
+  number_of_beds,
+  number_of_bathrooms,
+  dimensions,
+  image,
+  refetch,
+}) => {
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -21,7 +30,6 @@ const UserWishListCard = ({ wishlist, refetch }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await RemoveWishlist(id);
-        // console.log(res);
         if (res.deletedCount > 0) {
           refetch();
           Swal.fire("Deleted!", "Your Property has been deleted.", "success");
@@ -31,60 +39,91 @@ const UserWishListCard = ({ wishlist, refetch }) => {
   };
 
   return (
-    <div className="md:flex max-w-5xl mx-auto justify-start gap-8 mb-7 border  rounded-md border-[#7accf2] items-stretch bg-[#ecf6fb]">
-      <div className="">
-        <img
-          className="overflow-hidden rounded-l-md w-full lg:w-[300px] object-cover h-full"
-          src={image}
-          alt=""
-        />
-      </div>
-      <div className=" py-5 px-6">
-        <div className="flex gap-2 mb-3">
+    <div className="relative md:grid  gap-3 mt-3 overflow-hidden rounded-lg bg-[#ffffff]  grid-cols-7 group">
+      <div className="col-span-2 ">
+        <div className="group !opacity-100 overflow-hidden relative h-full">
           <img
-            className="w-[40px] border-2 border-[#2b4d5e] h-[40px] rounded-[50%]"
-            src={agent.agentImage}
-            alt={agent.name}
+            src={image}
+            alt={name}
+            className="object-cover w-full h-full group-hover:scale-125 transition-a"
           />
-          <div>
-            <h2 className="text-base text-[#2b4d5e] font-semibold">
-              Agent: {agent.name}
-            </h2>
-          </div>
         </div>
-
-        <h2 className="text-[#2b4d5e] mb-3 font-semibold text-xl">{title}</h2>
-
-        <p className="flex text-[#417086] items-center gap-1">
-          <IoMdLocate className="text-[#f01515]" />
-          {location}
-        </p>
-
-        <p className="flex text-[#417086] items-center gap-1">
-          <MdVerified className="text-green-500 text-lg" />
-          {status}
-        </p>
-
-        <p className="flex text-[#417086]  mb-3 gap-1   items-center ">
-          <HiCurrencyDollar className="text-[#2aca5a] text-xl" />
-
-          {price}
-        </p>
-
-        <div className="flex gap-3">
-          <Link to={`offer/${_id}`}>
-            <button className="flex gap-[2px] justify-center items-center transform duration-500 px-6 py-2 text-sm font-medium text-[#24d53b] border border-[#24d53b] rounded hover:bg-[#24d53b] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none uppercase">
-              <BiSolidOffer className="text-xl" /> Offer
-            </button>
+        <div className="absolute top-2 left-2 flex-align-center gap-x-2">
+          <span className="py-[3px] px-3 text-sm rounded-full capitalize text-white bg-primary">
+            {distance} away
+          </span>
+          <span className="py-[3px] px-3 text-sm rounded-full capitalize text-white bg-secondary">
+            for {purpose}
+          </span>
+        </div>
+      </div>
+      <div className="md:col-span-5">
+        <div className="p-3 space-y-1">
+          <Link
+            to={`/properties/${_id}`}
+            className="group-hover:text-primary transition-a"
+          >
+            <h1 className="text-lg font-bold capitalize text-gray-700">
+              {name}
+            </h1>
           </Link>
 
-          <button
-            onClick={() => handleDelete(_id)}
-            className="flex justify-center gap-[2px]  items-center transform duration-500 px-6 py-2 text-sm font-medium text-[#f01515] border border-[#f01515] rounded hover:bg-[#f01515] hover:text-white active:bg-#1c4456 focus:outline-none focus:ring-none uppercase"
-          >
-            <ImCancelCircle className="text-lg" />
-            Remove
-          </button>
+          <div className=" flex-align-center gap-x-2 text-gray-500">
+            <BiMap />
+            <p>{location}</p>
+          </div>
+          <p className="text-gray-500 text-sm">{`${description?.slice(
+            0,
+            180
+          )}...`}</p>
+          <div className="flex justify-between py-3">
+            <div className="flex-align-center gap-x-2">
+              <div className="icon-box !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
+                <BiBed />
+              </div>
+              <p className="text-sm text-gray-500">{number_of_beds} Beds</p>
+            </div>
+            <div className="flex-align-center gap-x-2">
+              <div className="icon-box !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
+                <BiTab />
+              </div>
+              <p className="text-sm text-gray-500">
+                {number_of_bathrooms} Bathrooms
+              </p>
+            </div>
+            <div className="flex-align-center gap-x-2">
+              <div className="icon-box !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
+                <BiMapAlt />
+              </div>
+              <p className="text-sm text-gray-500">{dimensions}</p>
+            </div>
+          </div>
+
+          <div className="mt-4 md:flex-center-between">
+            <h1 className="text-lg font-semibold text-primary">${price}</h1>
+            <div className="flex gap-3">
+              <Link to={`offer/${_id}`}>
+                <button className="flex gap-1 justify-center items-center font-medium rounded-full px-6 py-[6px] text-sm transform duration-500 bg-[#24d53b90] hover:bg-[#24d53b] text-white">
+                  Offer
+                  <BiSolidOffer className="text-lg" />
+                </button>
+              </Link>
+              <button
+                onClick={() => handleDelete(_id)}
+                className="flex gap-1 justify-center items-center font-medium rounded-full
+             px-4 py-[6px] text-sm transform duration-500 bg-[#f0151590] hover:bg-[#f01515] text-white "
+              >
+                Remove
+                <MdDeleteSweep className="text-lg" />
+              </button>
+              <Link to={`/properties/${_id}`}>
+                <button className="flex gap-1 justify-center items-center font-medium rounded-full px-6 py-[6px] text-sm transform duration-500 bg-[#33333390] hover:bg-[#333333] text-white">
+                  Details
+                  <MdKeyboardDoubleArrowRight className="text-lg" />
+                </button>
+              </Link>
+            </div>{" "}
+          </div>
         </div>
       </div>
     </div>

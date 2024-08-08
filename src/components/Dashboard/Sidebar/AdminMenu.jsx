@@ -1,18 +1,19 @@
-import MenuItem from "./MenuItem";
+import { BsBuildingGear } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
-import { MdOutlineManageAccounts } from "react-icons/md";
-import { LuTableProperties } from "react-icons/lu";
-import { MdRateReview } from "react-icons/md";
-import { BsGraphUp } from "react-icons/bs";
-import { RiAdvertisementFill } from "react-icons/ri";
-import { MdReport } from "react-icons/md";
+import { FcAdvertising } from "react-icons/fc";
+import {
+  MdOutlineManageAccounts,
+  MdRateReview,
+  MdReport,
+} from "react-icons/md";
+import MenuItem from "./MenuItem";
 
 const AdminMenu = () => {
   return (
     <>
       <MenuItem icon={CgProfile} label="Profile" address="adminProfile" />
       <MenuItem
-        icon={LuTableProperties}
+        icon={BsBuildingGear}
         label="Manage Properties"
         address="manage-properties"
       />
@@ -33,8 +34,8 @@ const AdminMenu = () => {
       />
 
       <MenuItem
-        icon={RiAdvertisementFill}
-        label="Advertise property"
+        icon={FcAdvertising}
+        label="Manage Advertisement"
         address="advertisements"
       />
     </>

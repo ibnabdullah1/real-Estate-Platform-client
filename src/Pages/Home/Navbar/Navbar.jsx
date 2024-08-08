@@ -1,102 +1,80 @@
-import { useEffect, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import { FaBars } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
-import MenuDropdown from "./MenuDropdown";
+import { useState } from "react";
+import { HiMiniBars3 } from "react-icons/hi2";
+import { IoClose } from "react-icons/io5";
+import { Link, NavLink } from "react-router-dom";
+import Dropdown from "./MenuDropdown";
 
 const Navbar = () => {
-  let Links = [
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const Links = [
     { name: "Home", link: "/" },
     { name: "About Us", link: "/about-us" },
     { name: "Services", link: "/services" },
     { name: "Properties", link: "/properties" },
-    { name: "All Properties", link: "/all-properties" },
     { name: "Reviews", link: "/reviews" },
-    { name: "Our Agents", link: "/agents" },
-    { name: "Contact Us", link: "/contact" },
+    { name: "FAQs", link: "/faq" },
+    { name: "Contact Us", link: "/contact-us" },
   ];
-  let [open, setOpen] = useState(false);
-  const [scrolling, setScrolling] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const shouldScroll = scrollTop > 0;
-
-      setScrolling(shouldScroll);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const navbarClasses = ` justify-between items-center sticky left-0  right-0 top-0 z-20 ${
-    scrolling ? "bg-opacity-60  backdrop-blur-lg" : "bg-opacity-[100%]  "
-  } bg-white text-[#1c4456]`;
 
   return (
-    <div className={navbarClasses}>
-      <div className="max-w-7xl mx-auto lg:flex  items-center justify-between  py-2 lg:px-10 px-3">
-        {/* logo section */}
-        <div className="flex items-center justify-between">
-          <div className="flex  items-end justify-between">
+    <header className="max-w-7xl mx-auto  flex justify-between items-center px-8 py-2">
+      <Link to="/">
+        <div className="">
+          <div className="flex items-center justify-center font-semibold relative text-2xl text-[#004068] ">
             <img
               className="w-10"
-              src="https://i.ibb.co/9HSJFBL/Real-Estatelogo.png"
+              src="https://png.pngtree.com/png-vector/20221014/ourmid/pngtree-house-real-estate-icon-png-image_6319467.png"
               alt=""
-            />
-            <h2 className="font-bold text-2xl  text-secondary">
-              Real <span className="text-[#f49d19]">Estate</span>
-            </h2>
-          </div>
-
-          <div className="flex cursor-pointer gap-3 lg:hidden justify-center items-center">
-            <MenuDropdown />
-            <div
-              onClick={() => setOpen(!open)}
-              className=" cursor-pointer lg:hidden"
-            >
-              {open ? (
-                <AiOutlineClose className="text-2xl" />
-              ) : (
-                <FaBars className="text-2xl" />
-              )}
-            </div>
+            />{" "}
+            <h1>Real</h1>
+            <h3 className="text-primary">Estate</h3>
           </div>
         </div>
-
-        <ul
-          className={`lg:flex lg:items-center lg:pb-0 pb-12 absolute lg:static  lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? "top-12 bg-white bg-opacity-90  " : "top-[-490px]"
-          }`}
-        >
-          {Links.map((link, i) => (
-            <li key={i} className="ml-4 lg:my-0 my-7">
+      </Link>
+      <div
+        className={`fixed top-[63px] bg-white  lg:bg-transparent right-0  px-7 pb-7 pt-4 w-[250px] lg:w-auto h-full overflow-auto transform transition-transform duration-500 ${
+          isMenuOpen
+            ? "translate-x-0  "
+            : "translate-x-full lg:translate-x-0   "
+        } lg:static lg:p-0 lg:overflow-visible `}
+      >
+        <ul className="list-none block bg-opacity-5 lg:flex gap-5">
+          {Links.map((item) => (
+            <li key={item.link} className="my-2">
               <NavLink
-                to={link.link}
-                onClick={() => setOpen(false)}
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? "pending"
-                    : isActive
-                    ? " border-b-[2px] text-primary border-b-primary"
-                    : "text-secondary"
+                to={item.link}
+                className={({ isActive }) =>
+                  `  duration-300 ${
+                    isActive
+                      ? "text-orange-500 border-b-2 border-orange-500"
+                      : "text-[#333333] hover:text-orange-500"
+                  }`
                 }
               >
-                {link.name}
+                {item.name}
               </NavLink>
             </li>
           ))}
         </ul>
+      </div>
+      <div className="flex items-center gap-2">
+        <Dropdown />
 
-        <div className="cursor-pointer hidden lg:flex">
-          <MenuDropdown />
+        <div className="lg:hidden">
+          <button
+            type="button"
+            className="text-primary text-4xl"
+            onClick={toggleMenu}
+          >
+            {isMenuOpen ? <IoClose /> : <HiMiniBars3 />}
+          </button>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

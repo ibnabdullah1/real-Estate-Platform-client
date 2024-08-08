@@ -63,13 +63,13 @@ const HeaderFilters = ({
         </select>
         <input
           type="text"
-          className="border outline-none bg-transparent focus:border-primary placeholder:text-sm px-4 py-[7px] w-full rounded"
+          className="border outline-none bg-transparent focus:border-primary placeholder:text-sm px-4 py-[4px] w-full rounded"
           placeholder="Enter Keywords.."
           value={filterTitle}
           onChange={(e) => setFilterTitle(e.target.value)}
         />
         <button
-          className={` w-[300px]  border  px-4 py-[7px] rounded ${
+          className={` w-[300px] text-xs lg:text-base border px-4 py-[7px] rounded ${
             !hasFilters
               ? "opacity-50 cursor-not-allowed bg-gray-400 border-gray-500 text-gray-700"
               : "bg-white text-primary border-primary"

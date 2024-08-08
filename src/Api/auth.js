@@ -31,7 +31,6 @@ export const getAllRequestedProperties = async () => {
 
 export const getReqProperty = async (id) => {
   const { data } = await axiosPublic(`/requestedProperty/${id}`);
-  console.log(data);
   return data;
 };
 
@@ -43,7 +42,6 @@ export const getRole = async (email) => {
 // Get CurrentUser
 export const getUser = async (email) => {
   const { data } = await axiosPublic(`/user/${email}`);
-  console.log(data);
   return data;
 };
 

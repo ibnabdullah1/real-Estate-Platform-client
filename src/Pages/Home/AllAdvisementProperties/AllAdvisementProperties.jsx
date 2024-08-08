@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { ImSpinner8 } from "react-icons/im";
+import { Link } from "react-router-dom";
 import axiosPublic from "../../../Api/axiosPublic";
 import AllAdvisementPropertiesCard from "./AllAdvisementPropertiesCard";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { ImSpinner8 } from "react-icons/im";
 const AllAdvisementProperties = () => {
   const [noData, setNoData] = useState("No data available");
   const {
@@ -17,7 +17,7 @@ const AllAdvisementProperties = () => {
       return res.data;
     },
   });
-  // console.log(advertisementProperties);
+
   return (
     <div className="py-20 bg-[#F5FCFF] min-h-screen px-10">
       <h2 className="text-3xl text-center  text-[#1c4456] mb-10 font-bold uppercase">

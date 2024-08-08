@@ -3,7 +3,6 @@ import useRole from "../../Hooks/useRole";
 
 const Profile = ({ user }) => {
   const [role] = useRole();
-  console.log(role);
   return (
     <div className="max-w-4xl mx-auto bg-[#E3EFF3]">
       <Helmet>

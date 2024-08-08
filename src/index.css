@@ -1,13 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Mulish&family=Nunito&family=Nunito+Sans:wght@400;600&family=Poppins:ital,wght@0,400;0,500;1,300;1,400&family=Questrial&family=Raleway&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.montserrat {
-  font-family: "Montserrat", sans-serif;
-}
 .heading {
-  @apply text-xl lg:text-3xl font-bold capitalize text-secondary dark:text-slate-300;
+  @apply text-xl lg:text-3xl mb-5 md:mb-0 font-bold capitalize text-secondary;
 }
 
 .sub-heading {
@@ -36,42 +33,6 @@
 .back-to-top-btn.active {
   opacity: 1;
   visibility: visible;
-}
-
-.wb-pagination {
-  @apply flex-align-center sm:flex-center-center mt-4 w-full px-4 select-none max-w-[300px] sm:max-w-fit overflow-auto mx-auto;
-}
-
-.wb-pagination::-webkit-scrollbar {
-  @apply hidden;
-}
-
-.wb-pagination .pagination-item {
-  @apply p-2;
-}
-
-.wb-pagination .pagination-item .pagination-link {
-  @apply grid w-8 h-8 mx-3 text-sm text-inherit place-items-center;
-}
-
-.wb-pagination .prev,
-.wb-pagination .next {
-  @apply inline-flex text-primary;
-}
-
-.wb-pagination .prev {
-  @apply mr-4;
-}
-.wb-pagination .next {
-  @apply ml-4;
-}
-
-.disabled {
-  @apply opacity-40;
-}
-
-.wb-pagination .pagination-item.pagination-link-active .pagination-link {
-  @apply text-white rounded-lg shadow-md bg-primary shadow-primary/60;
 }
 
 .test-color {
@@ -143,4 +104,12 @@
 
 .input-radio input[type="radio"]:checked + label::after {
   @apply scale-100 -translate-y-1/2;
+}
+/* Accordion */
+.accordion.active {
+  @apply text-primary;
+}
+
+.isOpen {
+  @apply max-h-screen p-4;
 }

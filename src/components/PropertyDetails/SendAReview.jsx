@@ -1,25 +1,68 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 
-const SendAReview = () => {
+import axiosPublic from "../../Api/axiosPublic";
+import useAuth from "../../Hooks/useAuth";
+import StarRating from "../StarRating/StarRating";
+const SendAReview = ({ id, refetch }) => {
   const [checked, setChecked] = useState(false);
   const [error, setError] = useState("");
+  const { user } = useAuth();
+  const [rating, setRating] = useState(0);
+  const formatDate = (date) => {
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "long" });
+    const year = date.getFullYear();
 
-  const handleSubmitReview = (e) => {
+    // Add ordinal suffix
+    const ordinalSuffix = (n) => {
+      const s = ["th", "st", "nd", "rd"];
+      const v = n % 100;
+      return s[(v - 20) % 10] || s[v] || s[0];
+    };
+
+    return `${day}${ordinalSuffix(day)} ${month} ${year}`;
+  };
+  const date = new Date();
+  const handleStarChange = (value) => {
+    setRating(value);
+  };
+  const handleSubmitReview = async (e) => {
     e.preventDefault();
     const form = e.target;
+    try {
+      const reviewDescription = form.review.value;
+      if (reviewDescription.length < 10) {
+        return toast.error("Please fill out minimum 10 characters ");
+      }
+      const userImage = user?.photoURL;
+      const data = {
+        date: formatDate(date),
+        name: form.name.value,
+        image: userImage,
+        rating: rating,
+        email: form.email.value,
+        review: form.review.value,
+      };
+      if (!checked) {
+        setError("Please check the checkbox to proceed.");
+        return;
+      }
+      if (rating === 0) {
+        toast.error("Please send a rating");
+        return;
+      }
+      setError("");
 
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      review: form.review.value,
-    };
-    if (!checked) {
-      setError("Please check the checkbox to proceed.");
-      return;
+      const res = await axiosPublic.put(`/property-review/${id}`, data);
+      if (res?.data?.acknowledged) {
+        refetch();
+        toast.success("Review sent successfully");
+      }
+    } catch (e) {
+      toast.error(e.message);
     }
-    setError("");
-    console.log(data);
     setChecked(false);
     form.reset();
   };
@@ -28,6 +71,8 @@ const SendAReview = () => {
     <div className="h-min bg-gray-100 px-6 py-10 space-y-6 rounded">
       <p className="text-xl font-semibold my-2">Add A Review</p>
       <form onSubmit={handleSubmitReview} className="space-y-5">
+        <StarRating maxStars={5} onChange={handleStarChange} />
+
         <div className="flex justify-between items-center gap-3 my-5">
           <div className="w-full">
             <label htmlFor="name" className="block font-semibold mb-2">

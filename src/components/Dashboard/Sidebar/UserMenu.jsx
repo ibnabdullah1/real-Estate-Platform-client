@@ -1,7 +1,7 @@
-import { CgProfile } from "react-icons/cg";
-import { MdPlaylistAddCheckCircle } from "react-icons/md";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
 import { GoCodeReview } from "react-icons/go";
+import { MdPlaylistAddCheckCircle } from "react-icons/md";
 
 import MenuItem from "./MenuItem";
 

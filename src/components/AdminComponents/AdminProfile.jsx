@@ -3,7 +3,7 @@ import Profile from "../Profile/Profile";
 
 const AdminProfile = () => {
   const { user } = useAuth();
-  console.log(user);
+
   return (
     <div>
       <Profile user={user} />

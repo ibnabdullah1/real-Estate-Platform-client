@@ -1,30 +1,33 @@
 import Rating from "react-rating";
 
-const PropertyReviews = () => {
+const PropertyReviews = ({ reviewsCollection }) => {
   return (
     <div className="py-6 h-min  rounded space-y-4">
-      <p className="text-2xl font-bold my-2">03 Comments </p>
-      <PropertyReviewCard />
-      <PropertyReviewCard />
-      <PropertyReviewCard />
-      <PropertyReviewCard />
+      <p className="text-2xl font-bold my-2">
+        {reviewsCollection ? reviewsCollection?.length : 0} Comments{" "}
+      </p>
+      {reviewsCollection?.map((review, i) => (
+        <PropertyReviewCard review={review} key={i} />
+      ))}
     </div>
   );
 };
 
 export default PropertyReviews;
-export const PropertyReviewCard = () => {
+export const PropertyReviewCard = ({ review }) => {
   return (
     <div className="flex gap-4">
       <img
         className="w-14 h-14 rounded-full mt-5"
-        src="https://randomuser.me/api/portraits/men/10.jpg"
+        src={review?.image}
         alt="user avatar"
         loading="lazy"
       />
       <div className="space-y-3 mt-5">
-        <h6 className="text-2xl font-semibold text-gray-900 ">Danielle Doe</h6>
-        <p className="text-sm text-gray-400 ">26th February 2024</p>
+        <h6 className="text-2xl font-semibold text-gray-900 ">
+          {review?.name}
+        </h6>
+        <p className="text-sm text-gray-400 ">{review?.date}</p>
 
         <p className=" text-[#ffcc00]">
           <Rating
@@ -58,15 +61,11 @@ export const PropertyReviewCard = () => {
                 />
               </svg>
             }
-            initialRating={4}
+            initialRating={review?.rating}
             readonly
           />
         </p>
-        <p className="text-gray-400 text-lg">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut amet
-          tortor, libero blandit pharetra ornare faucibus ultricies
-          sollicitudin.
-        </p>
+        <p className="text-gray-400 text-lg">{review?.review}</p>
       </div>{" "}
     </div>
   );

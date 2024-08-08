@@ -3,7 +3,7 @@ const Dashboard = () => {
     <div className="h-full  mb-10 ">
       {/* <!-- Statistics Cards --> */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-        <div className="bg-blue-500 dark:bg-[#1c4456] shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-300 text-white font-medium group">
+        <div className="bg-[#1c4456] shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
@@ -11,7 +11,7 @@ const Dashboard = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current text-blue-800 dark:text-[#1c4456] transform transition-transform duration-500 ease-in-out"
+              className="stroke-current text-[#1c4456] transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"
@@ -26,7 +26,7 @@ const Dashboard = () => {
             <p>Visitors</p>
           </div>
         </div>
-        <div className="bg-blue-500 dark:bg-[#1c4456] shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-300 text-white font-medium group">
+        <div className="bg-[#1c4456] shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
@@ -34,7 +34,7 @@ const Dashboard = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current text-blue-800 dark:text-[#1c4456] transform transition-transform duration-500 ease-in-out"
+              className="stroke-current text-[#1c4456] transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"
@@ -49,7 +49,7 @@ const Dashboard = () => {
             <p>Orders</p>
           </div>
         </div>
-        <div className="bg-blue-500 dark:bg-[#1c4456] shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-300 text-white font-medium group">
+        <div className="bg-[#1c4456] shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
@@ -57,7 +57,7 @@ const Dashboard = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current text-blue-800 dark:text-[#1c4456] transform transition-transform duration-500 ease-in-out"
+              className="stroke-current text-[#1c4456] transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"
@@ -72,7 +72,7 @@ const Dashboard = () => {
             <p>Sales</p>
           </div>
         </div>
-        <div className="bg-blue-500 dark:bg-[#1c4456] shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-300 text-white font-medium group">
+        <div className="bg-[#1c4456] shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
@@ -80,7 +80,7 @@ const Dashboard = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              className="stroke-current text-blue-800 dark:text-[#1c4456] transform transition-transform duration-500 ease-in-out"
+              className="stroke-current text-[#1c4456] transform transition-transform duration-500 ease-in-out"
             >
               <path
                 strokeLinecap="round"

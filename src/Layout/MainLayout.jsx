@@ -7,7 +7,23 @@ import Navbar from "../Pages/Home/Navbar/Navbar";
 const MainLayout = () => {
   const [showButton, setShowButton] = useState(false);
   const route = useLocation();
-  // Show/Hide scroll to top button
+  const [scrolling, setScrolling] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const shouldScroll = scrollTop > 0;
+
+      setScrolling(shouldScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   window.addEventListener("scroll", () => {
     window.scrollY > 500 ? setShowButton(true) : setShowButton(false);
   });
@@ -15,12 +31,15 @@ const MainLayout = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [route]);
-
+  const navbarClasses = `sticky top-0 z-20 ${
+    scrolling ? "lg:bg-opacity-80  lg:backdrop-blur-lg" : "bg-opacity-[100%]"
+  } bg-white text-[#1c4456]`;
   return (
-    <div className="max-w-7xl mx-auto">
-      {/* <Nav/> */}
-      <Navbar />
-      <div className="px-5 md:px-10">
+    <div className="font-questrial">
+      <div className={navbarClasses}>
+        <Navbar />
+      </div>
+      <div className="max-w-7xl mx-auto px-5 md:px-10">
         <Outlet />
       </div>
 

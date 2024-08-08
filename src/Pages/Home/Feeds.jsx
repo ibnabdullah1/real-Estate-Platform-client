@@ -8,7 +8,7 @@ const Feeds = () => {
         <h1 className="mx-auto sub-heading">blog post</h1>
         <h1 className="heading">latest newsfeeds</h1>
       </div>
-      <div className="grid grid-cols-1 gap-4 mt-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-2">
         {feeds.slice(0, 4).map((feed) => (
           <SingleFeedCardGrid key={feed.id} {...feed} />
         ))}

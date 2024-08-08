@@ -1,11 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import "./CheckoutForm.css";
-import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../Hooks/useAuth";
+import { ImSpinner9 } from "react-icons/im";
+import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Api/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
+import "./CheckoutForm.css";
 
 const CheckoutForm = ({ closeModal, offerData }) => {
   const [error, setError] = useState();
@@ -18,8 +18,7 @@ const CheckoutForm = ({ closeModal, offerData }) => {
   const [cardError, setCardError] = useState("");
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
-  const offerPrice = offerData.offerPrice;
-  console.log(offerData);
+  const offerPrice = offerData?.offerPrice;
 
   useEffect(() => {
     if (offerPrice > 0) {
@@ -66,7 +65,7 @@ const CheckoutForm = ({ closeModal, offerData }) => {
       });
 
     if (confirmError) {
-      console.log("confirm error");
+      toast.error("Something went wrong");
     } else {
       if (paymentIntent.status === "succeeded") {
         setTransactionId(paymentIntent.id);
@@ -75,11 +74,7 @@ const CheckoutForm = ({ closeModal, offerData }) => {
           status: "bought",
           transactionId: paymentIntent.id,
         };
-        const offerItemUpdated = await axiosSecure.put(
-          `/offerDataUpdate/${offerData._id}`,
-          updateData
-        );
-        console.log(offerItemUpdated);
+        await axiosSecure.put(`/offerDataUpdate/${offerData._id}`, updateData);
       }
     }
   };

@@ -6,7 +6,7 @@ const ErrorPage = () => {
     <div className="flex text-center justify-center items-center min-h-screen ">
       <div className="flex-col text-center flex-center-center">
         <img src={NotFoundImg} alt="" className="w-[300px] -mt-20" />
-        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold opacity-50">
+        <h1 className="text-xl md:text-3xl lg:text-5xl font-questrial mt-5 font-bold opacity-50">
           Page Not Found!!
         </h1>
         <Link

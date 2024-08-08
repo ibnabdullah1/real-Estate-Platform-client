@@ -1,12 +1,12 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { PiGoogleLogoBold } from "react-icons/pi";
-import useAuth from "../../Hooks/useAuth";
-import { imageUpload } from "../../Api/utilis";
-import { saveUser } from "../../Api/auth";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import toast from "react-hot-toast";
-import { TbFidgetSpinner } from "react-icons/tb";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { PiGoogleLogoBold } from "react-icons/pi";
+import { TbFidgetSpinner } from "react-icons/tb";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { saveUser } from "../../Api/auth";
+import { imageUpload } from "../../Api/utilis";
+import useAuth from "../../Hooks/useAuth";
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
@@ -35,15 +35,14 @@ const SignUp = () => {
       // Upload the image
       const imageData = await imageUpload(image);
       const result = await createUser(email, password);
-      console.log(result);
+
       if (result?.user?.email) {
         setLoading(false);
       }
       await updateUserProfile(name, imageData?.data?.display_url);
-      const dbResponse = await saveUser(result?.user);
-      console.log(dbResponse);
+      await saveUser(result?.user);
       navigate("/");
-      toast.success("Create user successfully");
+      toast.success("User created  successfully");
     } catch (e) {
       setLoading(false);
       toast.error(e?.message);
@@ -54,8 +53,8 @@ const SignUp = () => {
     try {
       const result = await signInWithGoogle();
 
-      const dbResponse = await saveUser(result?.user);
-      console.log(dbResponse);
+      await saveUser(result?.user);
+
       navigate(from, { replace: true });
       toast.success("Login successfully");
     } catch (e) {

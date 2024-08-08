@@ -1,5 +1,5 @@
-import axiosPublic from "../../Api/axiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import axiosPublic from "../../Api/axiosPublic";
 
 const AllAgents = () => {
   const { data: agents = [], isLoading: isUserLoading } = useQuery({
@@ -9,7 +9,7 @@ const AllAgents = () => {
       return res.data;
     },
   });
-  console.log(agents);
+
   return (
     <div className="pb-20 pt-[100px]">
       <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">

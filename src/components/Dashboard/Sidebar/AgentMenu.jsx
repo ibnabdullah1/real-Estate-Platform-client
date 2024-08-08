@@ -1,17 +1,17 @@
-import MenuItem from "./MenuItem";
 import { BsBuildingFillAdd } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
+import { FcSalesPerformance } from "react-icons/fc";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { MdEventAvailable } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
-import { CgProfile } from "react-icons/cg";
-import { VscDiffAdded } from "react-icons/vsc";
-import { FcSalesPerformance } from "react-icons/fc";
+import MenuItem from "./MenuItem";
 
 const AgentMenu = () => {
   return (
     <>
       <MenuItem icon={CgProfile} label="Profile" address="agent-profile" />
       <MenuItem
-        icon={VscDiffAdded}
+        icon={IoMdAddCircleOutline}
         label="Add Property"
         address="addProperties"
       />

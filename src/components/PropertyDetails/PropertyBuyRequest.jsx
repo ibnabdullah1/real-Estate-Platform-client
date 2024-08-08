@@ -8,11 +8,6 @@ const PropertyBuyRequest = () => {
       phone: form.phone.value,
       description: form.description.value,
     };
-
-    // Log form data or send it to a server
-    console.log(data);
-
-    // Optionally, reset the form after submission
     form.reset();
   };
 

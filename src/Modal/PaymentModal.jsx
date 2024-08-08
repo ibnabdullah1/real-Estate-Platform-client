@@ -1,11 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { Fragment } from "react";
 import CheckoutForm from "../components/Form/CheckoutForm";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const PaymentModal = ({ isOpen, closeModal, offerItem }) => {
-  console.log(offerItem);
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>

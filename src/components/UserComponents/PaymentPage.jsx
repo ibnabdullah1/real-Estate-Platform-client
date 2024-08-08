@@ -1,15 +1,12 @@
 import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "../Form/CheckoutForm";
-import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import useAuth from "../../Hooks/useAuth";
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import CheckoutForm from "../Form/CheckoutForm";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const PaymentPage = () => {
   let [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth();
   const offerData = useLoaderData();
-  console.log(offerData);
   function closeModal() {
     setIsOpen(false);
   }

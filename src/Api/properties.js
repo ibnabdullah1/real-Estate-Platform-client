@@ -5,9 +5,7 @@ export const userRoleUpdate = async (id, message) => {
   const roleUpdate = {
     role: message,
   };
-  console.log(roleUpdate);
   const { data } = await axiosPublic.put(`/user/${id}`, roleUpdate);
-  console.log(data);
   return data;
 };
 
@@ -24,7 +22,7 @@ export const addRequestProperty = async (RequestedPropertyData) => {
     `/requestedProperties`,
     RequestedPropertyData
   );
-  console.log(data);
+
   return data;
 };
 
@@ -49,6 +47,11 @@ export const AgentPropertyUpdate = async (id, updateData) => {
 // save a wishlist data in db
 export const addWishlist = async (wishlistData) => {
   const { data } = await axiosPublic.post("/wishlists", wishlistData);
+  return data;
+};
+// save a wishlist data in db
+export const sendAPropertyReview = async (id, reviewData) => {
+  const { data } = await axiosPublic.post(`/property-review/${id}`, reviewData);
   return data;
 };
 
@@ -111,6 +114,5 @@ export const removeAdvertiseProperty = async (item, id) => {
 // add  advertisement properties
 export const FindUserData = async (item) => {
   const { data } = await axiosPublic.post(`/fraudUserData`, item);
-  console.log(data);
   return data;
 };

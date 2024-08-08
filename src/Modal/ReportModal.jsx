@@ -1,8 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import toast from "react-hot-toast";
-import useAuth from "../Hooks/useAuth";
 import { addReport } from "../Api/properties";
+import useAuth from "../Hooks/useAuth";
 const ReportModal = ({ agent, _id, title, closeModal, reportModalIsOpen }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
@@ -33,7 +33,7 @@ const ReportModal = ({ agent, _id, title, closeModal, reportModalIsOpen }) => {
     e.preventDefault();
     try {
       const data = await addReport(reportData);
-      console.log(data);
+
       if (data.insertedId) {
         toast.success("Your review sent successfully");
       }
@@ -42,7 +42,6 @@ const ReportModal = ({ agent, _id, title, closeModal, reportModalIsOpen }) => {
     } finally {
       setLoading(false);
     }
-    console.log(reportData);
   };
 
   return (

@@ -32,7 +32,7 @@ const ReviewModal = ({ agent, title, closeModal, reviewModalIsOpen }) => {
     e.preventDefault();
     try {
       const data = await addReview(reviewData);
-      console.log(data);
+
       if (data.insertedId) {
         toast.success("Your review sent successfully");
       }
@@ -41,7 +41,6 @@ const ReviewModal = ({ agent, title, closeModal, reviewModalIsOpen }) => {
     } finally {
       setLoading(false);
     }
-    console.log(reviewData);
   };
 
   return (

@@ -1,10 +1,10 @@
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { PiGoogleLogoBold } from "react-icons/pi";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../Hooks/useAuth";
-import toast from "react-hot-toast";
 import { saveUser } from "../../Api/auth";
-import { useState } from "react";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
   const { signIn, signInWithGoogle } = useAuth();
@@ -12,7 +12,6 @@ const Login = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const from = location.state?.from?.pathname || "/";
-  console.log(from);
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();

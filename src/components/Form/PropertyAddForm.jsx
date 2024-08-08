@@ -11,7 +11,7 @@ const PropertyAddForm = ({
 
       <form onSubmit={handleSubmit} className=" w-full p-4">
         <div className="space-y-6">
-          <div className="flex justify-between gap-7">
+          <div className="md:flex justify-between gap-7 space-y-4">
             <div className="space-y-1 w-full text-sm">
               <label htmlFor="Name" className="block text-gray-600">
                 Property Name
@@ -46,7 +46,7 @@ const PropertyAddForm = ({
             </div>
           </div>
 
-          <div className="flex justify-between gap-7">
+          <div className="md:flex justify-between gap-7 space-y-4">
             <div className="space-y-1   w-full text-sm">
               <label htmlFor="title" className="block text-gray-600">
                 Purpose
@@ -75,7 +75,7 @@ const PropertyAddForm = ({
               />
             </div>
           </div>
-          <div className="flex justify-between gap-7">
+          <div className="md:flex justify-between gap-7 space-y-4">
             <div className="space-y-1 text-sm w-full">
               <label htmlFor="price" className="block text-gray-600">
                 Distance
@@ -104,7 +104,7 @@ const PropertyAddForm = ({
               />
             </div>
           </div>
-          <div className="flex justify-between gap-7">
+          <div className="md:flex justify-between gap-7 space-y-4">
             <div className="space-y-1 text-sm w-full">
               <label htmlFor="price" className="block text-gray-600">
                 Bedrooms

@@ -4,8 +4,13 @@ import { GiBathtub } from "react-icons/gi";
 import { GoArrowSwitch } from "react-icons/go";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { PiArrowsInSimpleBold } from "react-icons/pi";
-import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
+import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import axiosPublic from "../../Api/axiosPublic";
+import { addWishlist } from "../../Api/properties";
+import useAuth from "../../Hooks/useAuth";
 import FeaturedAdsProperty from "../FeaturedAdsProperty/FeaturedAdsProperty";
 import FactsAndFeatures from "../PropertyDetails/FactsAndFeatures";
 import FloorPlan from "../PropertyDetails/FloorPlan";
@@ -19,7 +24,25 @@ import PropertyReviews from "../PropertyDetails/PropertyReviews";
 import PropertyVideo from "../PropertyDetails/PropertyVideo";
 import SendAReview from "../PropertyDetails/SendAReview";
 const PropertiesDetails = () => {
+  const { id } = useParams();
+  const { user } = useAuth();
+
   const {
+    refetch,
+    data: properties,
+    isLoading,
+  } = useQuery({
+    queryKey: ["properties", id],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/properties/${id}`);
+      return res.data;
+    },
+  });
+  if (isLoading) {
+    return;
+  }
+  const {
+    _id,
     name,
     location,
     price,
@@ -31,7 +54,49 @@ const PropertiesDetails = () => {
     agent,
     description,
     category,
-  } = useLoaderData();
+    status,
+    reviewsCollection,
+  } = properties;
+
+  const wishlistData = {
+    _id,
+    name,
+    location,
+    price,
+    purpose,
+    number_of_beds,
+    number_of_bathrooms,
+    dimensions,
+    image,
+    agent,
+    description,
+    category,
+    buyerEmail: user?.email,
+    buyerName: user?.displayName,
+    status,
+  };
+
+  const handlePropertyAddToWishlist = async (e) => {
+    e.preventDefault();
+    try {
+      if (!user?.email) {
+        return toast.error(
+          "You are not logged in yet. Please log in and try again"
+        );
+      }
+
+      const data = await addWishlist(wishlistData);
+      if (data.insertedId) {
+        toast.success("Your Property added in wishlist");
+      }
+      const isExist = data?.message?.trim() === "Is already added in wishlist";
+      if (isExist) {
+        toast.error("Is already added in wishlist");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
 
   return (
     <div className="py-20">
@@ -73,7 +138,10 @@ const PropertiesDetails = () => {
                 <button className="border border-gray-300 rounded p-2 text-gray-400 hover:bg-primary duration-300 hover:border-primary hover:text-white ">
                   <IoShareSocialOutline />
                 </button>
-                <button className="border border-gray-300 rounded p-2 text-gray-400 hover:bg-primary duration-300 hover:border-primary hover:text-white ">
+                <button
+                  onClick={handlePropertyAddToWishlist}
+                  className="border border-gray-300 rounded p-2 text-gray-400 hover:bg-primary duration-300 hover:border-primary hover:text-white "
+                >
                   <FaRegHeart />
                 </button>
                 <button className="border border-gray-300 rounded p-2 text-gray-400 hover:bg-primary duration-300 hover:border-primary hover:text-white ">
@@ -108,7 +176,7 @@ const PropertiesDetails = () => {
           <PropertyImages image={image} />
           {/* Others  */}
 
-          <div className="lg:grid  lg:grid-cols-3 mt-4 gap-4">
+          <div className="lg:grid  lg:grid-cols-3 mt-4 gap-4 space-y-4 lg:space-y-0">
             <div className="lg:col-span-2 space-y-4 w-full">
               <PropertyDescription description={description} />
               <PropertyOverview
@@ -131,8 +199,8 @@ const PropertiesDetails = () => {
               <PropertyLocationMap location={location} />
               <PropertyConclusion />
               {/* Property Review */}
-              <PropertyReviews />
-              <SendAReview />
+              <PropertyReviews reviewsCollection={reviewsCollection} />
+              <SendAReview id={_id} refetch={refetch} />
             </div>
             <div className="lg:col-span-1">
               <div className="lg:sticky lg:top-10">

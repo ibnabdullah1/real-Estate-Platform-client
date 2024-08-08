@@ -1,4 +1,3 @@
-import { BiBuildingHouse } from "react-icons/bi";
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FiFacebook } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -9,9 +8,16 @@ const Footer = () => {
       <footer>
         <div className="md:flex flex-wrap gap-2">
           <div className="flex-1 basis-[10rem]">
-            <Link to="/" className="flex-shrink-0 flex-align-center gap-x-1">
-              <BiBuildingHouse className="text-3xl text-primary" />
-              <h1 className="hidden md:block">MartVilla</h1>
+            <Link to="/">
+              <div className="flex items-center font-semibold relative text-2xl text-[#ffffff] ">
+                <img
+                  className="w-14"
+                  src="https://png.pngtree.com/png-vector/20221014/ourmid/pngtree-house-real-estate-icon-png-image_6319467.png"
+                  alt=""
+                />
+                <h1>Real</h1>
+                <h3 className="text-primary">Estate</h3>
+              </div>
             </Link>
             <div className="mt-3">
               <p className="text-sm">
@@ -45,7 +51,7 @@ const Footer = () => {
                 <a href="#"> Order Tracking</a>
               </li>
               <li className="my-3 text-muted">
-                <a href="#">Whislist</a>
+                <a href="#">Wishlist</a>
               </li>
               <li className="my-3 text-muted">
                 <a href="#">Terms of use</a>
@@ -72,7 +78,7 @@ const Footer = () => {
                 <a href="#">Blog</a>
               </li>
               <li className="my-3 text-muted">
-                <a href="#">Portifolio</a>
+                <a href="#">Portfolio</a>
               </li>
             </ul>
           </div>
@@ -93,7 +99,7 @@ const Footer = () => {
                 <a href="#">Terms & Conditions</a>
               </li>
               <li className="my-3 text-muted">
-                <a href="#">Pricacy Policy</a>
+                <a href="#">Privacy Policy</a>
               </li>
             </ul>
           </div>
@@ -117,10 +123,21 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <div className="py-2 mt-3 text-center border-t text-muted border-dark">
+      <div className="text-sm mt-3 text-center border-t text-muted py-4">
         <p>
-          Created By <span className="text-primary">Wabweni Brian</span> | All
-          Rights Reserved
+          Copyright © 2024{" "}
+          <span className="text-primary cursor-pointer">
+            RealEstate Community
+          </span>
+          . All Rights Reserved || Designed By{" "}
+          <a
+            className="text-primary cursor-pointer"
+            target="_blank"
+            href="https://www.linkedin.com/in/arafatibnabdullah/"
+            rel="noreferrer"
+          >
+            Arafat Hosen
+          </a>{" "}
         </p>
       </div>
     </div>

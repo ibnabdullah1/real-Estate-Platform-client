@@ -12,8 +12,8 @@ const Reviews = () => {
   return (
     <div className=" pt-2 lg:px-10 px-10 ">
       <div className=" max-w-7xl mx-auto pt-2 pb-16 ">
-        <div className="flex  justify-between items-end py-8">
-          <div className="text-center">
+        <div className="flex justify-between items-end py-8">
+          <div className="md:text-center">
             <h1 className="mx-auto sub-heading"> What Our Client Say</h1>
             <h1 className="heading"> Testimonials</h1>
           </div>

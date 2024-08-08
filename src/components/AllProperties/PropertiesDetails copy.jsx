@@ -57,7 +57,7 @@ const PropertiesDetails1 = () => {
     e.preventDefault();
     try {
       const data = await addWishlist(wishlistData);
-      console.log(data);
+
       if (data.insertedId) {
         toast.success("Your Property added in wishlist");
       }

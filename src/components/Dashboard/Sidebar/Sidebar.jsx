@@ -1,57 +1,65 @@
 import { useState } from "react";
-// Components
-import MenuItem from "./MenuItem";
-// Icons
-import { AiOutlineBars } from "react-icons/ai";
-import useRole from "../../../Hooks/useRole";
-import AgentMenu from "./AgentMenu";
-import UserMenu from "./UserMenu";
-import AdminMenu from "./AdminMenu";
+import { HiMiniBars3, HiMiniBuildingOffice2 } from "react-icons/hi2";
+import { LuHome } from "react-icons/lu";
+import {
+  MdClose,
+  MdOutlineConnectWithoutContact,
+  MdOutlineDashboardCustomize,
+} from "react-icons/md";
 import { Link } from "react-router-dom";
-import { MdOutlineDashboardCustomize } from "react-icons/md";
+import useRole from "../../../Hooks/useRole";
+import SidebarSkeleton from "../../Skeleton/SidebarSkeleton";
+import AdminMenu from "./AdminMenu";
+import AgentMenu from "./AgentMenu";
+import MenuItem from "./MenuItem";
+import UserMenu from "./UserMenu";
 
 const Sidebar = () => {
-  const [isActive, setActive] = useState(false);
-
-  const [role] = useRole();
-  // Sidebar Responsive Handler
+  const [isActive, setActive] = useState(true);
+  const [role, isRoleLoading] = useRole();
   const handleToggle = () => {
     setActive(!isActive);
   };
+
+  if (isRoleLoading) {
+    return <SidebarSkeleton />;
+  }
+
   return (
     <>
-      {/* Small Screen Navbar */}
-
-      <div className="bg-gray-100 text-gray-800 flex justify-end md:hidden">
+      <div className="bg-gray-100 text-gray-800 flex justify-end lg:hidden">
         <button
           onClick={handleToggle}
-          className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-200"
+          className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-100 text-primary"
         >
-          <AiOutlineBars className="h-5 w-5" />
+          {isActive ? (
+            <HiMiniBars3 className="text-3xl" />
+          ) : (
+            <MdClose className="text-3xl" />
+          )}
         </button>
       </div>
 
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-[#1c4456] w-64 space-y-6  py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-20 fixed flex flex-col justify-between overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-[rgba(0,0,0,0.05)]  bg-[#fff] w-[280px] space-y-6  pb-4  inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        }  lg:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
-          <div className="flex justify-center ">
+          <div className="sticky py-2 top-0 bg-white z-40">
             <Link to="/">
-              <button className="flex items-center rounded-full hover:shadow-xl px-7 py-2  bg-[rgb(19,47,60,0.2)]">
-                <div className="flex  items-center justify-between">
+              <div className="">
+                <div className="flex items-center justify-center font-semibold relative text-2xl text-[#004068] ">
+                  <h1>Real</h1>
                   <img
                     className=" w-10"
-                    src="https://i.ibb.co/KsdtzV6/siderlogo.png"
+                    src="https://png.pngtree.com/png-vector/20221014/ourmid/pngtree-house-real-estate-icon-png-image_6319467.png"
                     alt=""
                   />
-                  <h2 className="font-bold text-2xl uppercase text-white ">
-                    Real <span className="text-[#f49d19]">Estate</span>
-                  </h2>
+                  <h3 className="text-primary">Estate</h3>
                 </div>
-              </button>
+              </div>
             </Link>
           </div>
           <div className="flex flex-col justify-between flex-1 mt-6">
@@ -67,6 +75,18 @@ const Sidebar = () => {
               {role === "user" && <UserMenu />}
               {/* Host Menu Items */}
               {role === "agent" && <AgentMenu />}
+              <div className="w-full h-[1px] bg-secondary/30 my-8"></div>
+              <MenuItem icon={LuHome} label="Home" address="/" />{" "}
+              <MenuItem
+                icon={HiMiniBuildingOffice2}
+                label="Properties"
+                address="/properties"
+              />
+              <MenuItem
+                icon={MdOutlineConnectWithoutContact}
+                label="Contact"
+                address="/contact-us"
+              />
             </nav>
           </div>
         </div>

@@ -1,18 +1,30 @@
-import { useLoaderData } from "react-router-dom";
-import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { split } from "postcss/lib/list";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Api/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
 
 const OfferForm = () => {
-  const { title, location, agent, price, image, _id } = useLoaderData();
+  const {
+    name,
+    location,
+    agent,
+    price,
+    image,
+    _id,
+
+    description,
+    distance,
+    purpose,
+    number_of_beds,
+    number_of_bathrooms,
+    dimensions,
+  } = useLoaderData();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [loading, setLoading] = useState(false);
   const [prices, setPrices] = useState("");
   const [minDate, setMinDate] = useState(getCurrentDate());
-
+  const navigate = useNavigate();
   function getCurrentDate() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -25,11 +37,8 @@ const OfferForm = () => {
   };
   const handlePriceChange = (e) => {
     const inputValue = parseFloat(e.target.value);
-    const [, maxPrice] = price.split("-").map(parseFloat);
-
-    if (isNaN(inputValue) || inputValue > maxPrice) {
+    if (isNaN(inputValue) || inputValue > price) {
       toast.error("Price must be within the allowed range");
-      setPrices("");
     } else {
       setPrices(e.target.value);
     }
@@ -44,59 +53,63 @@ const OfferForm = () => {
       buyerName: user?.displayName,
       buyerDate,
       offerPrice,
-      title,
+      name,
       location,
       agent,
       price,
       image,
+      description,
+      distance,
+      purpose,
+      number_of_beds,
+      number_of_bathrooms,
+      dimensions,
       status: "pending",
     };
-    console.log(offerData);
-
     try {
       const res = await axiosSecure.post(`/addedOffers`, offerData);
-      console.log(res.data);
       if (res.data.insertedId) {
         toast.success("Your Offer Requested successfully!");
+        navigate("/dashboard/wishlist");
       }
     } catch (err) {
       toast.error(err.message);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
-    <div className="w-full md:max-w-2xl py-10  flex flex-col justify-center items-center text-gray-800 rounded-xl bg-white">
-      <h2 className="text-3xl text-[#1c4456] mb-5 font-bold uppercase">
+    <div className="w-full md:max-w-3xl py-10  flex flex-col justify-center items-center text-gray-800 rounded-xl bg-white">
+      <h2 className="text-3xl text-[#1c4456] mb-5 font-bold capitalize">
         Give a offer
       </h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="w-[80%] px-10">
         <div className="space-y-6">
-          <div className="space-y-1 text-sm">
-            <label htmlFor="title" className="block text-gray-400">
-              Property Title
-            </label>
-            <input
-              className="w-full px-4 py-3 text-gray-400 bg-gray-100  rounded-md "
-              defaultValue={title}
-              disabled
-            />
-          </div>
-          <div className="space-y-1 text-sm">
-            <label htmlFor="location" className="block text-gray-400">
-              Property Location
-            </label>
-            <input
-              className="w-full px-4 py-3 text-gray-400 bg-gray-100  rounded-md "
-              defaultValue={location}
-              disabled
-            />
+          <div className="flex justify-between gap-4 w-full ">
+            <div className="space-y-1 text-sm w-full">
+              <label htmlFor="title" className="block text-gray-400">
+                Property Title
+              </label>
+              <input
+                className="w-full px-4 py-3 text-gray-400 bg-gray-100  rounded-md "
+                defaultValue={name}
+                disabled
+              />
+            </div>
+            <div className="space-y-1 text-sm w-full">
+              <label htmlFor="location" className="block text-gray-400">
+                Property Location
+              </label>
+              <input
+                className="w-full px-4 py-3 text-gray-400 bg-gray-100  rounded-md "
+                defaultValue={location}
+                disabled
+              />
+            </div>
           </div>
 
-          <div className="flex justify-between gap-2">
-            <div className="space-y-1 text-sm">
+          <div className="flex justify-between gap-4 w-full ">
+            <div className="space-y-1 text-sm w-full">
               <label htmlFor="price" className="block text-gray-400">
                 Agent name
               </label>
@@ -107,7 +120,7 @@ const OfferForm = () => {
               />
             </div>
 
-            <div className="space-y-1 text-sm">
+            <div className="space-y-1 text-sm w-full">
               <label htmlFor="price" className="block text-gray-400">
                 Price Range
               </label>
@@ -118,8 +131,8 @@ const OfferForm = () => {
               />
             </div>
           </div>
-          <div className="flex justify-between gap-2">
-            <div className="space-y-1 text-sm">
+          <div className="flex justify-between gap-4 w-full ">
+            <div className="space-y-1 text-sm w-full">
               <label htmlFor="guest" className="block text-gray-400">
                 Buyer Name
               </label>
@@ -130,7 +143,7 @@ const OfferForm = () => {
               />
             </div>
 
-            <div className="space-y-1 text-sm">
+            <div className="space-y-1 text-sm w-full">
               <label htmlFor="guest" className="block text-gray-400">
                 Buyer Email
               </label>
@@ -142,8 +155,8 @@ const OfferForm = () => {
             </div>
           </div>
 
-          <div className="flex justify-between gap-2">
-            <div className="space-y-1 text-sm">
+          <div className="flex justify-between gap-4 w-full ">
+            <div className="space-y-1 text-sm w-full">
               <label htmlFor="bedrooms" className="block text-gray-600">
                 Buying date
               </label>
@@ -158,7 +171,7 @@ const OfferForm = () => {
                 min={minDate}
               />
             </div>
-            <div>
+            <div className="space-y-1 text-sm w-full">
               <label htmlFor="price" className="block text-gray-600">
                 Price
               </label>

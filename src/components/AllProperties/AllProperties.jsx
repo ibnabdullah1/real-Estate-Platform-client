@@ -16,9 +16,7 @@ const AllProperties = () => {
         setProperties(data);
         setIsLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   const handleSearch = (e) => {
@@ -33,7 +31,6 @@ const AllProperties = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
         setIsLoading(false);
       });
   };
